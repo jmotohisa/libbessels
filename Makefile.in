@@ -100,10 +100,8 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)" \
 	"$(DESTDIR)$(libbesselsdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-libbessels_la_DEPENDENCIES = ./bessel_wrap/toms644_wrap.o \
-	./bessel_wrap/hankel_gsl_wrap.o ./bessel_wrap/toms644/cbsubs.o \
-	./bessel_wrap/toms644/machcon.o ./bessel_wrap/toms644/zbsubs.o \
-	./bessel_wrap/toms644/xerror.o
+libbessels_la_DEPENDENCIES = ./bessel_wrap/libbesselwrap.la \
+	./bessel_wrap/toms644/libtoms644.la
 am_libbessels_la_OBJECTS = dbessel.lo
 libbessels_la_OBJECTS = $(am_libbessels_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -364,9 +362,10 @@ SUBDIRS = bessel_wrap
 # for shared (dynamic ?) library
 lib_LTLIBRARIES = libbessels.la
 libbessels_la_SOURCES = dbessel.c
-libbessels_la_LIBADD = ./bessel_wrap/toms644_wrap.o ./bessel_wrap/hankel_gsl_wrap.o \
-./bessel_wrap/toms644/cbsubs.o ./bessel_wrap/toms644/machcon.o ./bessel_wrap/toms644/zbsubs.o ./bessel_wrap/toms644/xerror.o 
+libbessels_la_LIBADD = ./bessel_wrap/libbesselwrap.la ./bessel_wrap/toms644/libtoms644.la
 
+# libbessels_la_LIBADD = ./bessel_wrap/toms644_wrap.o ./bessel_wrap/hankel_gsl_wrap.o \
+# ./bessel_wrap/toms644/cbsubs.o ./bessel_wrap/toms644/machcon.o ./bessel_wrap/toms644/zbsubs.o ./bessel_wrap/toms644/xerror.o 
 
 # nobase_include_HEADERS = libbessels.h dbessel.h
 include_HEADERS = libbessels.h
