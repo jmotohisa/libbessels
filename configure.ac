@@ -12,15 +12,18 @@ AM_INIT_AUTOMAKE
 # Checks for programs.
 AC_PROG_CC
 AM_PROG_CC_C_O
-AC_CHECK_PROGS(F77, f77 xlf77 cf77 fort77 f90 xlf90 gfortran)
+AC_CHECK_PROGS(F77, f77 xlf77 cf77 fort77 f90 xlf90 gfortran g95)
 AC_PROG_F77
-AC_F77_LIBRARY_LDFLAGS
+# AC_F77_LIBRARY_LDFLAGS
 
 AC_PROG_INSTALL
 AC_PROG_RANLIB
 
 # Checks for libraries.
 AM_PROG_LIBTOOL
+
+AC_CHECK_LIB([g2c], [main])
+AC_CHECK_LIB([m], [main])
 
 # If we have a Fortran compiler, link to its libraries, since these
 # are probably needed to link with the BLAS/LAPACK libraries.

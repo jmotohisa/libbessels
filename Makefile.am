@@ -16,7 +16,7 @@ SUBDIRS = bessel_wrap
 # for shared (dynamic ?) library
 lib_LTLIBRARIES = libbessels.la
 libbessels_la_SOURCES = dbessel.c
-libbessels_la_LIBADD = ./bessel_wrap/libbesselwrap.la ./bessel_wrap/toms644/libtoms644.la
+libbessels_la_LIBADD = ./bessel_wrap/libbesselwrap.la ./bessel_wrap/toms644/libtoms644.la # $(FLIBS)
 
 # libbessels_la_LIBADD = ./bessel_wrap/toms644_wrap.o ./bessel_wrap/hankel_gsl_wrap.o \
 # ./bessel_wrap/toms644/cbsubs.o ./bessel_wrap/toms644/machcon.o ./bessel_wrap/toms644/zbsubs.o ./bessel_wrap/toms644/xerror.o 
