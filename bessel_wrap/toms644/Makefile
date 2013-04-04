@@ -14,6 +14,10 @@
 
 
 
+# # for static libraries
+# noinst_LIBRARIES = libtoms644.a
+# libtoms644_a_SOURCES = cbsubs.f zbsubs.f machcon.f xerror.f
+
 
 am__make_dryrun = \
   { \
@@ -53,25 +57,24 @@ host_triplet = x86_64-apple-darwin10.8.0
 subdir = bessel_wrap/toms644
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
+	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
+	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-LIBRARIES = $(noinst_LIBRARIES)
-AR = ar
-ARFLAGS = cru
-AM_V_AR = $(am__v_AR_$(V))
-am__v_AR_ = $(am__v_AR_$(AM_DEFAULT_VERBOSITY))
-am__v_AR_0 = @echo "  AR      " $@;
-am__v_AR_1 = 
-libtoms644_a_AR = $(AR) $(ARFLAGS)
-libtoms644_a_LIBADD =
-am_libtoms644_a_OBJECTS = cbsubs.$(OBJEXT) zbsubs.$(OBJEXT) \
-	machcon.$(OBJEXT) xerror.$(OBJEXT)
-libtoms644_a_OBJECTS = $(am_libtoms644_a_OBJECTS)
+LTLIBRARIES = $(noinst_LTLIBRARIES)
+libtoms644_la_LIBADD =
+am_libtoms644_la_OBJECTS = cbsubs.lo zbsubs.lo machcon.lo xerror.lo
+libtoms644_la_OBJECTS = $(am_libtoms644_la_OBJECTS)
+AM_V_lt = $(am__v_lt_$(V))
+am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -86,19 +89,22 @@ am__v_at_0 = @
 am__v_at_1 = 
 DEFAULT_INCLUDES = -I. -I$(top_builddir)
 F77COMPILE = $(F77) $(AM_FFLAGS) $(FFLAGS)
+LTF77COMPILE = $(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS)
 AM_V_F77 = $(am__v_F77_$(V))
 am__v_F77_ = $(am__v_F77_$(AM_DEFAULT_VERBOSITY))
 am__v_F77_0 = @echo "  F77     " $@;
 am__v_F77_1 = 
 F77LD = $(F77)
-F77LINK = $(F77LD) $(AM_FFLAGS) $(FFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o \
-	$@
+F77LINK = $(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(F77LD) $(AM_FFLAGS) $(FFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_F77LD = $(am__v_F77LD_$(V))
 am__v_F77LD_ = $(am__v_F77LD_$(AM_DEFAULT_VERBOSITY))
 am__v_F77LD_0 = @echo "  F77LD   " $@;
 am__v_F77LD_1 = 
-SOURCES = $(libtoms644_a_SOURCES)
-DIST_SOURCES = $(libtoms644_a_SOURCES)
+SOURCES = $(libtoms644_la_SOURCES)
+DIST_SOURCES = $(libtoms644_la_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -124,12 +130,13 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing aclocal-1.13
+ACLOCAL = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing aclocal-1.13
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing autoconf
-AUTOHEADER = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing autoheader
-AUTOMAKE = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing automake-1.13
+AR = ar
+AUTOCONF = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing autoconf
+AUTOHEADER = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing autoheader
+AUTOMAKE = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing automake-1.13
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -139,6 +146,9 @@ CPPFLAGS = -I/opt/local/include
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
+DLLTOOL = false
+DSYMUTIL = dsymutil
+DUMPBIN = 
 ECHO_C = \c
 ECHO_N = 
 ECHO_T = 
@@ -146,6 +156,7 @@ EGREP = /opt/local/bin/grep -E
 EXEEXT = 
 F77 = g95
 FFLAGS = -g -O2
+FGREP = /opt/local/bin/grep -F
 FLIBS =  -L/opt/local/lib -L/opt/local/bin/../lib/g95/x86_64-apple-darwin10/4.2.4/ -L/opt/local/bin/../lib/g95/x86_64-apple-darwin10/4.2.4 -L/opt/local/lib/g95/x86_64-apple-darwin10/4.2.4/ -L/usr/lib/gcc// -L/opt/local/bin/../lib/g95/x86_64-apple-darwin10/4.2.4/// -L/opt/local/lib/g95/x86_64-apple-darwin10/4.2.4/// -L/usr/lib// -lf95 -lm
 GREP = /opt/local/bin/grep
 INSTALL = /opt/local/bin/ginstall -c
@@ -153,13 +164,23 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
+LD = /usr/libexec/gcc/i686-apple-darwin10/4.2.1/ld
 LDFLAGS = -L/opt/local/lib
 LIBOBJS = 
 LIBS = -lgsl 
+LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LIPO = lipo
+LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing makeinfo
+MAKEINFO = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing makeinfo
+MANIFEST_TOOL = :
 MKDIR_P = /opt/local/bin/gmkdir -p
+NM = /opt/local/bin/nm
+NMEDIT = nmedit
+OBJDUMP = false
 OBJEXT = o
+OTOOL = otool
+OTOOL64 = :
 PACKAGE = libbessels
 PACKAGE_BUGREPORT = motohisa@ist.hokudai.ac.jp
 PACKAGE_NAME = libbessels
@@ -169,15 +190,18 @@ PACKAGE_URL =
 PACKAGE_VERSION = 0.1a
 PATH_SEPARATOR = :
 RANLIB = ranlib
+SED = /opt/local/bin/gsed
 SET_MAKE = 
 SHELL = /bin/sh
-STRIP = 
+STRIP = strip
 VERSION = 0.1a
-abs_builddir = /Users/motohisa/HD2/Calculation/libbessels/bessel_wrap/toms644
-abs_srcdir = /Users/motohisa/HD2/Calculation/libbessels/bessel_wrap/toms644
-abs_top_builddir = /Users/motohisa/HD2/Calculation/libbessels
-abs_top_srcdir = /Users/motohisa/HD2/Calculation/libbessels
+abs_builddir = /Users/motohisa/svnwork/libbessels/trunk/bessel_wrap/toms644
+abs_srcdir = /Users/motohisa/svnwork/libbessels/trunk/bessel_wrap/toms644
+abs_top_builddir = /Users/motohisa/svnwork/libbessels/trunk
+abs_top_srcdir = /Users/motohisa/svnwork/libbessels/trunk
+ac_ct_AR = ar
 ac_ct_CC = gcc
+ac_ct_DUMPBIN = 
 ac_ct_F77 = g95
 am__include = include
 am__leading_dot = .
@@ -204,7 +228,7 @@ host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/install-sh
+install_sh = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -224,12 +248,14 @@ target_alias =
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
-noinst_LIBRARIES = libtoms644.a
-libtoms644_a_SOURCES = cbsubs.f zbsubs.f machcon.f xerror.f
+
+# for shared (dynamic?) librarires
+noinst_LTLIBRARIES = libtoms644.la
+libtoms644_la_SOURCES = cbsubs.f zbsubs.f machcon.f xerror.f
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .f .o .obj
+.SUFFIXES: .f .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -261,12 +287,18 @@ $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
-clean-noinstLIBRARIES:
-	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
-libtoms644.a: $(libtoms644_a_OBJECTS) $(libtoms644_a_DEPENDENCIES) $(EXTRA_libtoms644_a_DEPENDENCIES) 
-	$(AM_V_at)-rm -f libtoms644.a
-	$(AM_V_AR)$(libtoms644_a_AR) libtoms644.a $(libtoms644_a_OBJECTS) $(libtoms644_a_LIBADD)
-	$(AM_V_at)$(RANLIB) libtoms644.a
+clean-noinstLTLIBRARIES:
+	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
+	@list='$(noinst_LTLIBRARIES)'; \
+	locs=`for p in $$list; do echo $$p; done | \
+	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
+	      sort -u`; \
+	test -z "$$locs" || { \
+	  echo rm -f $${locs}; \
+	  rm -f $${locs}; \
+	}
+libtoms644.la: $(libtoms644_la_OBJECTS) $(libtoms644_la_DEPENDENCIES) $(EXTRA_libtoms644_la_DEPENDENCIES) 
+	$(AM_V_F77LD)$(F77LINK)  $(libtoms644_la_OBJECTS) $(libtoms644_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -279,6 +311,15 @@ distclean-compile:
 
 .f.obj:
 	$(AM_V_F77)$(F77COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.f.lo:
+	$(AM_V_F77)$(LTF77COMPILE) -c -o $@ $<
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -364,7 +405,7 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(LIBRARIES)
+all-am: Makefile $(LTLIBRARIES)
 installdirs:
 install: install-am
 install-exec: install-exec-am
@@ -398,7 +439,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
+clean-am: clean-generic clean-libtool clean-noinstLTLIBRARIES \
+	mostlyclean-am
 
 distclean: distclean-am
 	-rm -f Makefile
@@ -451,7 +493,8 @@ maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-compile mostlyclean-generic
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
 pdf: pdf-am
 
@@ -466,17 +509,18 @@ uninstall-am:
 .MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
-	clean-noinstLIBRARIES cscopelist-am ctags ctags-am distclean \
-	distclean-compile distclean-generic distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
+	clean-libtool clean-noinstLTLIBRARIES cscopelist-am ctags \
+	ctags-am distclean distclean-compile distclean-generic \
+	distclean-libtool distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic pdf pdf-am ps ps-am tags tags-am uninstall \
-	uninstall-am
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am
 
 
 # libtoms644_a_FFLAGS= -I$(srcdir)

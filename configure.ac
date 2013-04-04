@@ -20,6 +20,7 @@ AC_PROG_INSTALL
 AC_PROG_RANLIB
 
 # Checks for libraries.
+AM_PROG_LIBTOOL
 
 # If we have a Fortran compiler, link to its libraries, since these
 # are probably needed to link with the BLAS/LAPACK libraries.

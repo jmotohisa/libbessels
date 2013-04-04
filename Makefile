@@ -57,9 +57,12 @@ DIST_COMMON = INSTALL NEWS README AUTHORS ChangeLog \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(srcdir)/config.h.in depcomp $(include_HEADERS) \
 	$(libbessels_HEADERS) COPYING compile config.guess config.sub \
-	install-sh missing
+	install-sh missing ltmain.sh
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
+	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
+	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -97,20 +100,17 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)" \
 	"$(DESTDIR)$(libbesselsdir)"
-LIBRARIES = $(lib_LIBRARIES)
-AR = ar
-ARFLAGS = cru
-AM_V_AR = $(am__v_AR_$(V))
-am__v_AR_ = $(am__v_AR_$(AM_DEFAULT_VERBOSITY))
-am__v_AR_0 = @echo "  AR      " $@;
-am__v_AR_1 = 
-libbessels_a_AR = $(AR) $(ARFLAGS)
-libbessels_a_DEPENDENCIES = ./bessel_wrap/toms644_wrap.o \
+LTLIBRARIES = $(lib_LTLIBRARIES)
+libbessels_la_DEPENDENCIES = ./bessel_wrap/toms644_wrap.o \
 	./bessel_wrap/hankel_gsl_wrap.o ./bessel_wrap/toms644/cbsubs.o \
 	./bessel_wrap/toms644/machcon.o ./bessel_wrap/toms644/zbsubs.o \
 	./bessel_wrap/toms644/xerror.o
-am_libbessels_a_OBJECTS = dbessel.$(OBJEXT)
-libbessels_a_OBJECTS = $(am_libbessels_a_OBJECTS)
+am_libbessels_la_OBJECTS = dbessel.lo
+libbessels_la_OBJECTS = $(am_libbessels_la_OBJECTS)
+AM_V_lt = $(am__v_lt_$(V))
+am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -129,18 +129,24 @@ am__depfiles_maybe = depfiles
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CFLAGS) $(CFLAGS)
 AM_V_CC = $(am__v_CC_$(V))
 am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
 am__v_CC_0 = @echo "  CC      " $@;
 am__v_CC_1 = 
 CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libbessels_a_SOURCES)
-DIST_SOURCES = $(libbessels_a_SOURCES)
+SOURCES = $(libbessels_la_SOURCES)
+DIST_SOURCES = $(libbessels_la_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -227,12 +233,13 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing aclocal-1.13
+ACLOCAL = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing aclocal-1.13
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing autoconf
-AUTOHEADER = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing autoheader
-AUTOMAKE = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing automake-1.13
+AR = ar
+AUTOCONF = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing autoconf
+AUTOHEADER = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing autoheader
+AUTOMAKE = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing automake-1.13
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -242,6 +249,9 @@ CPPFLAGS = -I/opt/local/include
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
+DLLTOOL = false
+DSYMUTIL = dsymutil
+DUMPBIN = 
 ECHO_C = \c
 ECHO_N = 
 ECHO_T = 
@@ -249,6 +259,7 @@ EGREP = /opt/local/bin/grep -E
 EXEEXT = 
 F77 = g95
 FFLAGS = -g -O2
+FGREP = /opt/local/bin/grep -F
 FLIBS =  -L/opt/local/lib -L/opt/local/bin/../lib/g95/x86_64-apple-darwin10/4.2.4/ -L/opt/local/bin/../lib/g95/x86_64-apple-darwin10/4.2.4 -L/opt/local/lib/g95/x86_64-apple-darwin10/4.2.4/ -L/usr/lib/gcc// -L/opt/local/bin/../lib/g95/x86_64-apple-darwin10/4.2.4/// -L/opt/local/lib/g95/x86_64-apple-darwin10/4.2.4/// -L/usr/lib// -lf95 -lm
 GREP = /opt/local/bin/grep
 INSTALL = /opt/local/bin/ginstall -c
@@ -256,13 +267,23 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
+LD = /usr/libexec/gcc/i686-apple-darwin10/4.2.1/ld
 LDFLAGS = -L/opt/local/lib
 LIBOBJS = 
 LIBS = -lgsl 
+LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LIPO = lipo
+LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/missing makeinfo
+MAKEINFO = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/missing makeinfo
+MANIFEST_TOOL = :
 MKDIR_P = /opt/local/bin/gmkdir -p
+NM = /opt/local/bin/nm
+NMEDIT = nmedit
+OBJDUMP = false
 OBJEXT = o
+OTOOL = otool
+OTOOL64 = :
 PACKAGE = libbessels
 PACKAGE_BUGREPORT = motohisa@ist.hokudai.ac.jp
 PACKAGE_NAME = libbessels
@@ -272,15 +293,18 @@ PACKAGE_URL =
 PACKAGE_VERSION = 0.1a
 PATH_SEPARATOR = :
 RANLIB = ranlib
+SED = /opt/local/bin/gsed
 SET_MAKE = 
 SHELL = /bin/sh
-STRIP = 
+STRIP = strip
 VERSION = 0.1a
-abs_builddir = /Users/motohisa/HD2/Calculation/libbessels
-abs_srcdir = /Users/motohisa/HD2/Calculation/libbessels
-abs_top_builddir = /Users/motohisa/HD2/Calculation/libbessels
-abs_top_srcdir = /Users/motohisa/HD2/Calculation/libbessels
+abs_builddir = /Users/motohisa/svnwork/libbessels/trunk
+abs_srcdir = /Users/motohisa/svnwork/libbessels/trunk
+abs_top_builddir = /Users/motohisa/svnwork/libbessels/trunk
+abs_top_srcdir = /Users/motohisa/svnwork/libbessels/trunk
+ac_ct_AR = ar
 ac_ct_CC = gcc
+ac_ct_DUMPBIN = 
 ac_ct_F77 = g95
 am__include = include
 am__leading_dot = .
@@ -307,7 +331,7 @@ host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /Users/motohisa/HD2/Calculation/libbessels/install-sh
+install_sh = ${SHELL} /Users/motohisa/svnwork/libbessels/trunk/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -330,16 +354,20 @@ top_srcdir = .
 ACLOCAL_AMFLAGS = -I m4
 SUBDIRS = bessel_wrap
 
-#noinst_LIBRARIES = libbessels.a
-lib_LIBRARIES = libbessels.a
-libbessels_a_SOURCES = dbessel.c
-# dbessel.h
+# for static library
+# lib_LIBRARIES = libbessels.a
+# libbessels_a_SOURCES = dbessel.c
+# # dbessel.h
 
-#libbessels_a_LDADD = ./bessel_wrap/libbesselwrap.a ./bessel_wrap/toms644/libtoms644.a
-libbessels_a_LIBADD = ./bessel_wrap/toms644_wrap.o ./bessel_wrap/hankel_gsl_wrap.o \
+# libbessels_a_LIBADD = ./bessel_wrap/toms644_wrap.o ./bessel_wrap/hankel_gsl_wrap.o \
+# ./bessel_wrap/toms644/cbsubs.o ./bessel_wrap/toms644/machcon.o ./bessel_wrap/toms644/zbsubs.o ./bessel_wrap/toms644/xerror.o 
+
+# for shared (dynamic ?) library
+lib_LTLIBRARIES = libbessels.la
+libbessels_la_SOURCES = dbessel.c
+libbessels_la_LIBADD = ./bessel_wrap/toms644_wrap.o ./bessel_wrap/hankel_gsl_wrap.o \
 ./bessel_wrap/toms644/cbsubs.o ./bessel_wrap/toms644/machcon.o ./bessel_wrap/toms644/zbsubs.o ./bessel_wrap/toms644/xerror.o 
 
-# $(FLIBS)
 
 # nobase_include_HEADERS = libbessels.h dbessel.h
 include_HEADERS = libbessels.h
@@ -349,7 +377,7 @@ all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
 .SUFFIXES:
-.SUFFIXES: .c .o .obj
+.SUFFIXES: .c .lo .o .obj
 am--refresh: Makefile
 	@:
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
@@ -399,9 +427,10 @@ $(srcdir)/config.h.in:  $(am__configure_deps)
 
 distclean-hdr:
 	-rm -f config.h stamp-h1
-install-libLIBRARIES: $(lib_LIBRARIES)
+
+install-libLTLIBRARIES: $(lib_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
-	@list='$(lib_LIBRARIES)'; test -n "$(libdir)" || list=; \
+	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
 	list2=; for p in $$list; do \
 	  if test -f $$p; then \
 	    list2="$$list2 $$p"; \
@@ -410,30 +439,31 @@ install-libLIBRARIES: $(lib_LIBRARIES)
 	test -z "$$list2" || { \
 	  echo " $(MKDIR_P) '$(DESTDIR)$(libdir)'"; \
 	  $(MKDIR_P) "$(DESTDIR)$(libdir)" || exit 1; \
-	  echo " $(INSTALL_DATA) $$list2 '$(DESTDIR)$(libdir)'"; \
-	  $(INSTALL_DATA) $$list2 "$(DESTDIR)$(libdir)" || exit $$?; }
-	@$(POST_INSTALL)
-	@list='$(lib_LIBRARIES)'; test -n "$(libdir)" || list=; \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(libdir)'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(libdir)"; \
+	}
+
+uninstall-libLTLIBRARIES:
+	@$(NORMAL_UNINSTALL)
+	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
 	for p in $$list; do \
-	  if test -f $$p; then \
-	    $(am__strip_dir) \
-	    echo " ( cd '$(DESTDIR)$(libdir)' && $(RANLIB) $$f )"; \
-	    ( cd "$(DESTDIR)$(libdir)" && $(RANLIB) $$f ) || exit $$?; \
-	  else :; fi; \
+	  $(am__strip_dir) \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(libdir)/$$f'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(libdir)/$$f"; \
 	done
 
-uninstall-libLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@list='$(lib_LIBRARIES)'; test -n "$(libdir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(libdir)'; $(am__uninstall_files_from_dir)
-
-clean-libLIBRARIES:
-	-test -z "$(lib_LIBRARIES)" || rm -f $(lib_LIBRARIES)
-libbessels.a: $(libbessels_a_OBJECTS) $(libbessels_a_DEPENDENCIES) $(EXTRA_libbessels_a_DEPENDENCIES) 
-	$(AM_V_at)-rm -f libbessels.a
-	$(AM_V_AR)$(libbessels_a_AR) libbessels.a $(libbessels_a_OBJECTS) $(libbessels_a_LIBADD)
-	$(AM_V_at)$(RANLIB) libbessels.a
+clean-libLTLIBRARIES:
+	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
+	@list='$(lib_LTLIBRARIES)'; \
+	locs=`for p in $$list; do echo $$p; done | \
+	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
+	      sort -u`; \
+	test -z "$$locs" || { \
+	  echo rm -f $${locs}; \
+	  rm -f $${locs}; \
+	}
+libbessels.la: $(libbessels_la_OBJECTS) $(libbessels_la_DEPENDENCIES) $(EXTRA_libbessels_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK) -rpath $(libdir) $(libbessels_la_OBJECTS) $(libbessels_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -441,7 +471,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/dbessel.Po
+include ./$(DEPDIR)/dbessel.Plo
 
 .c.o:
 	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -456,6 +486,22 @@ include ./$(DEPDIR)/dbessel.Po
 #	$(AM_V_CC)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+.c.lo:
+	$(AM_V_CC)$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+#	$(AM_V_CC)source='$<' object='$@' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(LTCOMPILE) -c -o $@ $<
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
+
+distclean-libtool:
+	-rm -f libtool config.lt
 install-includeHEADERS: $(include_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \
@@ -789,7 +835,7 @@ distcleancheck: distclean
 	       exit 1; } >&2
 check-am: all-am
 check: check-recursive
-all-am: Makefile $(LIBRARIES) $(HEADERS) config.h
+all-am: Makefile $(LTLIBRARIES) $(HEADERS) config.h
 installdirs: installdirs-recursive
 installdirs-am:
 	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(libbesselsdir)"; do \
@@ -827,14 +873,15 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-recursive
 
-clean-am: clean-generic clean-libLIBRARIES mostlyclean-am
+clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
+	mostlyclean-am
 
 distclean: distclean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-hdr distclean-tags
+	distclean-hdr distclean-libtool distclean-tags
 
 dvi: dvi-recursive
 
@@ -854,7 +901,7 @@ install-dvi: install-dvi-recursive
 
 install-dvi-am:
 
-install-exec-am: install-libLIBRARIES
+install-exec-am: install-libLTLIBRARIES
 
 install-html: install-html-recursive
 
@@ -885,7 +932,8 @@ maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-recursive
 
-mostlyclean-am: mostlyclean-compile mostlyclean-generic
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
 pdf: pdf-recursive
 
@@ -895,29 +943,31 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-includeHEADERS uninstall-libLIBRARIES \
+uninstall-am: uninstall-includeHEADERS uninstall-libLTLIBRARIES \
 	uninstall-libbesselsHEADERS
 
 .MAKE: $(am__recursive_targets) all install-am install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am \
 	am--refresh check check-am clean clean-cscope clean-generic \
-	clean-libLIBRARIES cscope cscopelist-am ctags ctags-am dist \
-	dist-all dist-bzip2 dist-gzip dist-lzip dist-shar dist-tarZ \
-	dist-xz dist-zip distcheck distclean distclean-compile \
-	distclean-generic distclean-hdr distclean-tags distcleancheck \
-	distdir distuninstallcheck dvi dvi-am html html-am info \
-	info-am install install-am install-data install-data-am \
-	install-dvi install-dvi-am install-exec install-exec-am \
-	install-html install-html-am install-includeHEADERS \
-	install-info install-info-am install-libLIBRARIES \
+	clean-libLTLIBRARIES clean-libtool cscope cscopelist-am ctags \
+	ctags-am dist dist-all dist-bzip2 dist-gzip dist-lzip \
+	dist-shar dist-tarZ dist-xz dist-zip distcheck distclean \
+	distclean-compile distclean-generic distclean-hdr \
+	distclean-libtool distclean-tags distcleancheck distdir \
+	distuninstallcheck dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-includeHEADERS install-info \
+	install-info-am install-libLTLIBRARIES \
 	install-libbesselsHEADERS install-man install-pdf \
 	install-pdf-am install-ps install-ps-am install-strip \
 	installcheck installcheck-am installdirs installdirs-am \
 	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am uninstall-includeHEADERS \
-	uninstall-libLIBRARIES uninstall-libbesselsHEADERS
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am \
+	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
+	uninstall-libbesselsHEADERS
 
 
 # EXTRA_DIST = COPYRIGHT TODO m4
