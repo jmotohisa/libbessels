@@ -1,0 +1,4 @@
+2013-04-03  Junichi Motohisa  <motohisa@ist.hokudai.ac.jp>
+
+	* dbessel.c: Libraries for Bessel functions and their derivatives, created and autoconfiscated
+
