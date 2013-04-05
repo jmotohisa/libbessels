@@ -7,7 +7,7 @@
 #define Besselj_n(n,x) gsl_sf_bessel_Jn(n,x)
 #define Bessely_n(n,x) gsl_sf_bessel_Yn(n,x)
 #define Besseli_n(n,x) gsl_sf_bessel_In(n,x)
-#define Besselk_n(n,x) gsl_sf_bessel_In(n,x)
+#define Besselk_n(n,x) gsl_sf_bessel_Kn(n,x)
 #endif
 
 #endif
