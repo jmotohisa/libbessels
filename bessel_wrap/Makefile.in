@@ -14,7 +14,6 @@
 
 @SET_MAKE@
 
-
 VPATH = @srcdir@
 am__make_dryrun = \
   { \
@@ -53,7 +52,7 @@ build_triplet = @build@
 host_triplet = @host@
 subdir = bessel_wrap
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
-	$(top_srcdir)/depcomp $(libbessels_HEADERS)
+	$(libbessels_HEADERS)
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -65,6 +64,33 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
+AM_V_P = $(am__v_P_@AM_V@)
+am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
+am__v_P_0 = false
+am__v_P_1 = :
+AM_V_GEN = $(am__v_GEN_@AM_V@)
+am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
+am__v_GEN_0 = @echo "  GEN     " $@;
+am__v_GEN_1 = 
+AM_V_at = $(am__v_at_@AM_V@)
+am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
+am__v_at_0 = @
+am__v_at_1 = 
+SOURCES =
+DIST_SOURCES =
+RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
+	ctags-recursive dvi-recursive html-recursive info-recursive \
+	install-data-recursive install-dvi-recursive \
+	install-exec-recursive install-html-recursive \
+	install-info-recursive install-pdf-recursive \
+	install-ps-recursive install-recursive installcheck-recursive \
+	installdirs-recursive pdf-recursive ps-recursive \
+	tags-recursive uninstall-recursive
+am__can_run_installinfo = \
+  case $$AM_UPDATE_INFO_DIR in \
+    n|no|NO) false;; \
+    *) (install-info --version) >/dev/null 2>&1;; \
+  esac
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -92,64 +118,7 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(libbesselsdir)"
-LTLIBRARIES = $(lib_LTLIBRARIES)
-libbesselwrap_la_LIBADD =
-am_libbesselwrap_la_OBJECTS = toms644_wrap.lo hankel_gsl_wrap.lo
-libbesselwrap_la_OBJECTS = $(am_libbesselwrap_la_OBJECTS)
-AM_V_lt = $(am__v_lt_@AM_V@)
-am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
-am__v_lt_0 = --silent
-am__v_lt_1 = 
-AM_V_P = $(am__v_P_@AM_V@)
-am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
-am__v_P_0 = false
-am__v_P_1 = :
-AM_V_GEN = $(am__v_GEN_@AM_V@)
-am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
-am__v_GEN_0 = @echo "  GEN     " $@;
-am__v_GEN_1 = 
-AM_V_at = $(am__v_at_@AM_V@)
-am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
-am__v_at_0 = @
-am__v_at_1 = 
-DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
-depcomp = $(SHELL) $(top_srcdir)/depcomp
-am__depfiles_maybe = depfiles
-am__mv = mv -f
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
-	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
-	$(AM_CFLAGS) $(CFLAGS)
-AM_V_CC = $(am__v_CC_@AM_V@)
-am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
-am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
-CCLD = $(CC)
-LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_CCLD = $(am__v_CCLD_@AM_V@)
-am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
-am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
-SOURCES = $(libbesselwrap_la_SOURCES)
-DIST_SOURCES = $(libbesselwrap_la_SOURCES)
-RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
-	ctags-recursive dvi-recursive html-recursive info-recursive \
-	install-data-recursive install-dvi-recursive \
-	install-exec-recursive install-html-recursive \
-	install-info-recursive install-pdf-recursive \
-	install-ps-recursive install-recursive installcheck-recursive \
-	installdirs-recursive pdf-recursive ps-recursive \
-	tags-recursive uninstall-recursive
-am__can_run_installinfo = \
-  case $$AM_UPDATE_INFO_DIR in \
-    n|no|NO) false;; \
-    *) (install-info --version) >/dev/null 2>&1;; \
-  esac
+am__installdirs = "$(DESTDIR)$(libbesselsdir)"
 HEADERS = $(libbessels_HEADERS)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
@@ -324,24 +293,11 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = toms644
-
-# for static libraries
-# noinst_LIBRARIES = libbesselwrap.a
-# libbesselwrap_a_SOURCES = toms644_wrap.c hankel_gsl_wrap.c
-
-# for shared (dynamic ?) libraries
-# noinst_LTLIBRARIES = libbesselwrap.la
-lib_LTLIBRARIES = libbesselwrap.la
-libbesselwrap_la_SOURCES = toms644_wrap.c hankel_gsl_wrap.c
-
-#nobase_include_HEADERS = libbessels/gsl_bessel_wrap.h libbessels/hankel_gsl_wrap.h libbessels/toms644_wrap.h
-#nobase_include_HEADERS = gsl_bessel_wrap.h hankel_gsl_wrap.h toms644_wrap.h
 libbesselsdir = $(includedir)/libbessels
 libbessels_HEADERS = gsl_bessel_wrap.h hankel_gsl_wrap.h toms644_wrap.h
 all: all-recursive
 
 .SUFFIXES:
-.SUFFIXES: .c .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -372,73 +328,6 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-
-install-libLTLIBRARIES: $(lib_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
-	list2=; for p in $$list; do \
-	  if test -f $$p; then \
-	    list2="$$list2 $$p"; \
-	  else :; fi; \
-	done; \
-	test -z "$$list2" || { \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(libdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(libdir)" || exit 1; \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(libdir)'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(libdir)"; \
-	}
-
-uninstall-libLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
-	for p in $$list; do \
-	  $(am__strip_dir) \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(libdir)/$$f'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(libdir)/$$f"; \
-	done
-
-clean-libLTLIBRARIES:
-	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
-	@list='$(lib_LTLIBRARIES)'; \
-	locs=`for p in $$list; do echo $$p; done | \
-	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
-	      sort -u`; \
-	test -z "$$locs" || { \
-	  echo rm -f $${locs}; \
-	  rm -f $${locs}; \
-	}
-libbesselwrap.la: $(libbesselwrap_la_OBJECTS) $(libbesselwrap_la_DEPENDENCIES) $(EXTRA_libbesselwrap_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK) -rpath $(libdir) $(libbesselwrap_la_OBJECTS) $(libbesselwrap_la_LIBADD) $(LIBS)
-
-mostlyclean-compile:
-	-rm -f *.$(OBJEXT)
-
-distclean-compile:
-	-rm -f *.tab.c
-
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hankel_gsl_wrap.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/toms644_wrap.Plo@am__quote@
-
-.c.o:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c $<
-
-.c.obj:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c `$(CYGPATH_W) '$<'`
-
-.c.lo:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -624,10 +513,10 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-recursive
-all-am: Makefile $(LTLIBRARIES) $(HEADERS)
+all-am: Makefile $(HEADERS)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(libbesselsdir)"; do \
+	for dir in "$(DESTDIR)$(libbesselsdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -662,14 +551,11 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-recursive
 
-clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
-	mostlyclean-am
+clean-am: clean-generic clean-libtool mostlyclean-am
 
 distclean: distclean-recursive
-	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
-distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-tags
+distclean-am: clean-am distclean-generic distclean-tags
 
 dvi: dvi-recursive
 
@@ -689,7 +575,7 @@ install-dvi: install-dvi-recursive
 
 install-dvi-am:
 
-install-exec-am: install-libLTLIBRARIES
+install-exec-am:
 
 install-html: install-html-recursive
 
@@ -712,14 +598,12 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-recursive
 
-mostlyclean-am: mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool
+mostlyclean-am: mostlyclean-generic mostlyclean-libtool
 
 pdf: pdf-recursive
 
@@ -729,25 +613,23 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-libLTLIBRARIES uninstall-libbesselsHEADERS
+uninstall-am: uninstall-libbesselsHEADERS
 
 .MAKE: $(am__recursive_targets) install-am install-strip
 
 .PHONY: $(am__recursive_targets) CTAGS GTAGS TAGS all all-am check \
-	check-am clean clean-generic clean-libLTLIBRARIES \
-	clean-libtool cscopelist-am ctags ctags-am distclean \
-	distclean-compile distclean-generic distclean-libtool \
+	check-am clean clean-generic clean-libtool cscopelist-am ctags \
+	ctags-am distclean distclean-generic distclean-libtool \
 	distclean-tags distdir dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
 	install-html-am install-info install-info-am \
-	install-libLTLIBRARIES install-libbesselsHEADERS install-man \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	installdirs-am maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
-	uninstall-am uninstall-libLTLIBRARIES \
+	install-libbesselsHEADERS install-man install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am \
 	uninstall-libbesselsHEADERS
 
 

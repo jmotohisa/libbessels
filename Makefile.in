@@ -101,9 +101,10 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)" \
 	"$(DESTDIR)$(libbesselsdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-libbessels_la_DEPENDENCIES = ./bessel_wrap/libbesselwrap.la \
-	./bessel_wrap/toms644/libtoms644.la
-am_libbessels_la_OBJECTS = dbessel.lo
+am__DEPENDENCIES_1 =
+libbessels_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
+am_libbessels_la_OBJECTS = dbessel.lo toms644_wrap.lo \
+	hankel_gsl_wrap.lo cbsubs.lo zbsubs.lo machcon.lo xerror.lo
 libbessels_la_OBJECTS = $(am_libbessels_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -143,6 +144,21 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
+F77COMPILE = $(F77) $(AM_FFLAGS) $(FFLAGS)
+LTF77COMPILE = $(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS)
+AM_V_F77 = $(am__v_F77_@AM_V@)
+am__v_F77_ = $(am__v_F77_@AM_DEFAULT_V@)
+am__v_F77_0 = @echo "  F77     " $@;
+am__v_F77_1 = 
+F77LD = $(F77)
+F77LINK = $(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(F77LD) $(AM_FFLAGS) $(FFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_F77LD = $(am__v_F77LD_@AM_V@)
+am__v_F77LD_ = $(am__v_F77LD_@AM_DEFAULT_V@)
+am__v_F77LD_0 = @echo "  F77LD   " $@;
+am__v_F77LD_1 = 
 SOURCES = $(libbessels_la_SOURCES)
 DIST_SOURCES = $(libbessels_la_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
@@ -349,27 +365,14 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-ACLOCAL_AMFLAGS = -I m4
 SUBDIRS = bessel_wrap
-
-# for static library
-# lib_LIBRARIES = libbessels.a
-# libbessels_a_SOURCES = dbessel.c
-# # dbessel.h
-
-# libbessels_a_LIBADD = ./bessel_wrap/toms644_wrap.o ./bessel_wrap/hankel_gsl_wrap.o \
-# ./bessel_wrap/toms644/cbsubs.o ./bessel_wrap/toms644/machcon.o ./bessel_wrap/toms644/zbsubs.o ./bessel_wrap/toms644/xerror.o 
-
-# for shared (dynamic ?) library
 lib_LTLIBRARIES = libbessels.la
-libbessels_la_SOURCES = dbessel.c
-libbessels_la_LIBADD = ./bessel_wrap/libbesselwrap.la ./bessel_wrap/toms644/libtoms644.la
-# $(FLIBS)
+libbessels_la_SOURCES = dbessel.c \
+          bessel_wrap/toms644_wrap.c bessel_wrap/hankel_gsl_wrap.c \
+          bessel_wrap/toms644/cbsubs.f bessel_wrap/toms644/zbsubs.f \
+          bessel_wrap/toms644/machcon.f bessel_wrap/toms644/xerror.f
 
-# libbessels_la_LIBADD = ./bessel_wrap/toms644_wrap.o ./bessel_wrap/hankel_gsl_wrap.o \
-# ./bessel_wrap/toms644/cbsubs.o ./bessel_wrap/toms644/machcon.o ./bessel_wrap/toms644/zbsubs.o ./bessel_wrap/toms644/xerror.o 
-
-# nobase_include_HEADERS = libbessels.h dbessel.h
+libbessels_la_LIBADD = $(FLIBS)
 include_HEADERS = libbessels.h
 libbesselsdir = $(includedir)/libbessels
 libbessels_HEADERS = dbessel.h
@@ -377,7 +380,7 @@ all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
 .SUFFIXES:
-.SUFFIXES: .c .lo .o .obj
+.SUFFIXES: .c .f .lo .o .obj
 am--refresh: Makefile
 	@:
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
@@ -463,7 +466,7 @@ clean-libLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 libbessels.la: $(libbessels_la_OBJECTS) $(libbessels_la_DEPENDENCIES) $(EXTRA_libbessels_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK) -rpath $(libdir) $(libbessels_la_OBJECTS) $(libbessels_la_LIBADD) $(LIBS)
+	$(AM_V_F77LD)$(F77LINK) -rpath $(libdir) $(libbessels_la_OBJECTS) $(libbessels_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -472,6 +475,8 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dbessel.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hankel_gsl_wrap.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/toms644_wrap.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -493,6 +498,41 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+toms644_wrap.lo: bessel_wrap/toms644_wrap.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT toms644_wrap.lo -MD -MP -MF $(DEPDIR)/toms644_wrap.Tpo -c -o toms644_wrap.lo `test -f 'bessel_wrap/toms644_wrap.c' || echo '$(srcdir)/'`bessel_wrap/toms644_wrap.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/toms644_wrap.Tpo $(DEPDIR)/toms644_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='bessel_wrap/toms644_wrap.c' object='toms644_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o toms644_wrap.lo `test -f 'bessel_wrap/toms644_wrap.c' || echo '$(srcdir)/'`bessel_wrap/toms644_wrap.c
+
+hankel_gsl_wrap.lo: bessel_wrap/hankel_gsl_wrap.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT hankel_gsl_wrap.lo -MD -MP -MF $(DEPDIR)/hankel_gsl_wrap.Tpo -c -o hankel_gsl_wrap.lo `test -f 'bessel_wrap/hankel_gsl_wrap.c' || echo '$(srcdir)/'`bessel_wrap/hankel_gsl_wrap.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/hankel_gsl_wrap.Tpo $(DEPDIR)/hankel_gsl_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='bessel_wrap/hankel_gsl_wrap.c' object='hankel_gsl_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o hankel_gsl_wrap.lo `test -f 'bessel_wrap/hankel_gsl_wrap.c' || echo '$(srcdir)/'`bessel_wrap/hankel_gsl_wrap.c
+
+.f.o:
+	$(AM_V_F77)$(F77COMPILE) -c -o $@ $<
+
+.f.obj:
+	$(AM_V_F77)$(F77COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.f.lo:
+	$(AM_V_F77)$(LTF77COMPILE) -c -o $@ $<
+
+cbsubs.lo: bessel_wrap/toms644/cbsubs.f
+	$(AM_V_F77)$(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o cbsubs.lo `test -f 'bessel_wrap/toms644/cbsubs.f' || echo '$(srcdir)/'`bessel_wrap/toms644/cbsubs.f
+
+zbsubs.lo: bessel_wrap/toms644/zbsubs.f
+	$(AM_V_F77)$(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o zbsubs.lo `test -f 'bessel_wrap/toms644/zbsubs.f' || echo '$(srcdir)/'`bessel_wrap/toms644/zbsubs.f
+
+machcon.lo: bessel_wrap/toms644/machcon.f
+	$(AM_V_F77)$(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o machcon.lo `test -f 'bessel_wrap/toms644/machcon.f' || echo '$(srcdir)/'`bessel_wrap/toms644/machcon.f
+
+xerror.lo: bessel_wrap/toms644/xerror.f
+	$(AM_V_F77)$(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o xerror.lo `test -f 'bessel_wrap/toms644/xerror.f' || echo '$(srcdir)/'`bessel_wrap/toms644/xerror.f
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -969,8 +1009,6 @@ uninstall-am: uninstall-includeHEADERS uninstall-libLTLIBRARIES \
 	uninstall-includeHEADERS uninstall-libLTLIBRARIES \
 	uninstall-libbesselsHEADERS
 
-
-# EXTRA_DIST = COPYRIGHT TODO m4
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
