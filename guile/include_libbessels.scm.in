@@ -1,0 +1,3 @@
+(load-extension "@LIBDIR@/libbessels_guileext.la" "scm_init_math_bessel_module")
+(use-modules (math bessel))
+

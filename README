@@ -1,0 +1,43 @@
+Bessel Functions and their derivative
+with extensions for guile/libctl
+
+-----
+Bessel_Jn(n,x), Bessel_Yn(n,x),Bessel_In(n,x),Bessel_Kn(n,x)
+ Bessel functions with integer order
+  x: input : doulbe
+  n: order : integer
+  output: doulbe
+
+z0Bessel_H1n(n,x), z0Bessel_H2n(n,x)
+ Bessel (Hankel) functions with integer order
+  x: input : doulbe
+  n: order : integer
+  output: doulbe Complex
+
+zBessel_Jn(n,z), zBessel_Yn(n,z), zBessel_In(n,z), zBessel_Kn(n,z), zBessel_H1n(n,z), zBessel_H2n(n,z)
+ Bessel functions with integer order
+  z: input : doulbe Complex
+  n: order : integer
+  output: doulbe Complex
+
+-----
+dBessel_Jn(n,x), dBessel_Yn(n,x), dBessel_In(n,x), dBessel_Kn(n,x)
+ derivative of Bessel functions with integer order
+  x: input : doulbe
+  n: order : integer
+  output: doulbe
+
+dz0Bessel_H1n(n,x), dz0Bessel_H2n(n,x)
+ derivative of Bessel (Hankel) functions with integer order
+  x: input : doulbe
+  n: order : integer
+  output: doulbe Complex
+
+dzBessel_Jn(n,z), dzBessel_Yn(n,z), dzBessel_In(n,z), dzBessel_Kn(n,z), dzBessel_H1n(n,z), dzBessel_H2n(n,z)
+ derivatie of Bessel functions with integer order
+  z: input : doulbe Complex
+  n: order : integer
+  output: doulbe Complex
+
+...more function to be added
+

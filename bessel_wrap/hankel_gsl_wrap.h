@@ -65,10 +65,10 @@ ZComplex zcmplx(double x, double y)
 extern "C" {
 #endif
 
-  GLOBAL ZComplex z0Besselh1_n(int , double );
-  GLOBAL ZComplex z0Besselh2_n(int , double );
-  //  GLOBAL ZComplex zBesselH1_n(int , ZComplex );
-  //  GLOBAL ZComplex zBesselH2_n(int , ZComplex );
+  GLOBAL ZComplex z0Bessel_H1n(int , double );
+  GLOBAL ZComplex z0Bessel_H2n(int , double );
+  //  GLOBAL ZComplex zBessel_H1n(int , ZComplex );
+  //  GLOBAL ZComplex zBessel_H2n(int , ZComplex );
 
 #ifdef __cplusplus
 }

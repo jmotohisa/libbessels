@@ -34,21 +34,21 @@ typedef struct { double re, im; } ZComplex; /* complex numbers! */
 extern "C" {
 #endif
 
-GLOBAL double dBesselj_n(int , double );
-GLOBAL double dBessely_n(int , double );
-GLOBAL double dBesseli_n(int , double );
-GLOBAL double dBesselk_n(int , double );
+GLOBAL double dBessel_Jn(int , double );
+GLOBAL double dBessel_Yn(int , double );
+GLOBAL double dBessel_In(int , double );
+GLOBAL double dBessel_Kn(int , double );
 
-GLOBAL ZComplex dBesselh1_n(int , double );
-GLOBAL ZComplex dBesselh2_n(int , double );
+GLOBAL ZComplex dz0Bessel_H1n(int , double );
+GLOBAL ZComplex dz0Bessel_H2n(int , double );
 
 //double complex
-GLOBAL ZComplex zdBesselj_n(int , ZComplex );
-GLOBAL ZComplex zdBessely_n(int , ZComplex );
-GLOBAL ZComplex zdBesseli_n(int , ZComplex );
-GLOBAL ZComplex zdBesselk_n(int , ZComplex );
-GLOBAL ZComplex zdBesselh1_n(int , ZComplex );
-GLOBAL ZComplex zdBesselh2_n(int , ZComplex );
+GLOBAL ZComplex zdBessel_Jn(int , ZComplex );
+GLOBAL ZComplex zdBessel_Yn(int , ZComplex );
+GLOBAL ZComplex zdBessel_In(int , ZComplex );
+GLOBAL ZComplex zdBessel_Kn(int , ZComplex );
+GLOBAL ZComplex zdBessel_H1n(int , ZComplex );
+GLOBAL ZComplex zdBessel_H2n(int , ZComplex );
 
 #ifdef __cplusplus
 }

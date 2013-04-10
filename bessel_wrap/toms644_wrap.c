@@ -10,8 +10,8 @@
 #define GLOBAL_VALUE_DEFINE
 #include "toms644_wrap.h"
 
-#define FUNC_CBESSEL_N(j)						\
-  Complex cBessel##j##_n(int n, Complex z)	\
+#define FUNC_CBESSEL_N(j,J)					\
+  Complex cBessel_##J##n(int n, Complex z)	\
   {												\
   int nn=1,kode=1;								\
   Complex cy;									\
@@ -23,8 +23,8 @@
   return(cy);										\
 }
 
-#define FUNC_CBESSEL(j)						\
-  Complex cBessel##j(float fnu, Complex z)		\
+#define FUNC_CBESSEL(j,J)						\
+  Complex cBessel_##J(float fnu, Complex z)		\
   {												\
 	int nn=1,kode=1;							\
 	Complex cy;									\
@@ -34,24 +34,24 @@
 	return(cy);											\
   }
 
-#define FUNC_CBESSELH_N(j)						\
-  Complex cBesselh##j##_n(int n, Complex z)		\
+#define FUNC_CBESSELH_N(i)							\
+  Complex cBessel_H##i##n(int n, Complex z)		\
   {												\
 	int nn=1,kode=1,m;							\
 	Complex cy;									\
 	int nz=0;									\
 	float fnu;									\
 	int *ierr;									\
-	m=j;											\
+	m=i;											\
 	fnu=n;												\
 	cbesh_(&z, &fnu, &kode, &m, &nn, &cy, &nz, ierr);	\
 	return(cy);											\
   }
 
-#define FUNC_CBESSELH(j)						\
-  Complex cBesselh##j(float fnu, Complex z)		\
+#define FUNC_CBESSELH(i)						\
+  Complex cBessel_H##i(float fnu, Complex z)		\
   {												\
-	int nn=1,kode=1,m=j;							\
+	int nn=1,kode=1,m=i;							\
 	Complex cy;										\
 	int nz=0;											\
 	int *ierr;											\
@@ -59,8 +59,8 @@
 	return(cy);											\
   }
 
-#define FUNC_ZBESSEL_N(j)								\
-  ZComplex zBessel##j##_n(int n, ZComplex z)			\
+#define FUNC_ZBESSEL_N(j,J)								\
+  ZComplex zBessel_##J##n(int n, ZComplex z)			\
   {														\
 	int nn=1,kode=1;									\
 	ZComplex cyr;										\
@@ -75,8 +75,8 @@
 	return(cyr);														\
   }
 
-#define FUNC_ZBESSEL(j)									\
-  ZComplex zBessel##j(double fnu, ZComplex z)			\
+#define FUNC_ZBESSEL(j,J)								\
+  ZComplex zBessel_##J(double fnu, ZComplex z)			\
   {														\
 	int nn=1,kode=1;									\
 	ZComplex cyr;										\
@@ -90,10 +90,10 @@
   }
 
 
-#define FUNC_ZBESSELH_N(j)									\
-  ZComplex zBesselh##j##_n(int n, ZComplex z)				\
+#define FUNC_ZBESSELH_N(i)									\
+  ZComplex zBessel_H##i##_n(int n, ZComplex z)				\
   {															\
-	int nn=1,kode=1,m=j;									\
+	int nn=1,kode=1,m=i;									\
 	ZComplex cy;											\
 	int nz=0;												\
     int *ierr;												\
@@ -106,10 +106,10 @@
 	return(cy);															\
   }
 
-#define FUNC_ZBESSELH(j)									\
-  ZComplex zBesselh##j(double fnu, ZComplex z)				\
+#define FUNC_ZBESSELH(i)									\
+  ZComplex zBessel_H##i(double fnu, ZComplex z)				\
   {															\
-	int nn=1,kode=1,m=j;										\
+	int nn=1,kode=1,m=i;										\
 	ZComplex cy;												\
     int *ierr;														\
 	int nz=0;														\
@@ -125,21 +125,25 @@ FUNC_CBESSELH_N(2);
 FUNC_CBESSELH(1);
 FUNC_CBESSELH(2);
 
-FUNC_CBESSEL_N(i);
-FUNC_CBESSEL_N(j);
-FUNC_CBESSEL_N(k);
+FUNC_CBESSEL_N(i,I);
+//FUNC_CBESSEL_N(y,Y);
+FUNC_CBESSEL_N(j,J);
+FUNC_CBESSEL_N(k,K);
 
-FUNC_CBESSEL(i);
-FUNC_CBESSEL(j);
-FUNC_CBESSEL(k);
+FUNC_CBESSEL(j,J);
+//FUNC_CBESSEL(y,Y);
+FUNC_CBESSEL(i,I);
+FUNC_CBESSEL(k,K);
 
-FUNC_ZBESSEL_N(i);
-FUNC_ZBESSEL_N(j);
-FUNC_ZBESSEL_N(k);
+FUNC_ZBESSEL_N(j,J);
+//FUNC_ZBESSEL_N(y,Y);
+FUNC_ZBESSEL_N(i,I);
+FUNC_ZBESSEL_N(k,K);
 
-FUNC_ZBESSEL(i);
-FUNC_ZBESSEL(j);
-FUNC_ZBESSEL(k);
+FUNC_ZBESSEL(j,J);
+//FUNC_ZBESSEL(y,Y);
+FUNC_ZBESSEL(i,I);
+FUNC_ZBESSEL(k,K);
 
 FUNC_ZBESSELH_N(1);
 FUNC_ZBESSELH_N(2);
@@ -186,7 +190,7 @@ Complex cbirydz(Complex z)
   return(ai);
 }
 
-Complex cBessely_n(int n, Complex z)
+Complex cBessel_Yn(int n, Complex z)
 {
   int nn=1,kode=1;
   Complex cy,cwrk;
@@ -198,7 +202,7 @@ Complex cBessely_n(int n, Complex z)
   return(cy);
 }
 
-Complex cBessely(float fnu, Complex z)
+Complex cBessel_Y(float fnu, Complex z)
 {
   int nn=1,kode=1;
   Complex cy,cwrk;
@@ -208,7 +212,7 @@ Complex cBessely(float fnu, Complex z)
   return(cy);
 }
 
-ZComplex zBessely_n(int n, ZComplex z)
+ZComplex zBessel_Yn(int n, ZComplex z)
 {
   int nn=1,kode=1;
   ZComplex cyr;
@@ -224,7 +228,7 @@ ZComplex zBessely_n(int n, ZComplex z)
   return(cyr);
 }
 
-ZComplex zBessely(double fnu, ZComplex z)
+ZComplex zBessel_Y(double fnu, ZComplex z)
 {
   int nn=1,kode=1;
   ZComplex cyr;

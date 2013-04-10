@@ -26,104 +26,104 @@ c derivative of bessel function
 #include "dbessel.h"
 
 // double
-double dBesselj_n(int m, double z)
+double dBessel_Jn(int m, double z)
 {
   if(m==0)
-	return( - Besselj_n(1,z));
+	return( - Bessel_Jn(1,z));
   else
-	return((Besselj_n(m-1,z)-Besselj_n(m+1,z))/2.);
+	return((Bessel_Jn(m-1,z)-Bessel_Jn(m+1,z))/2.);
 }
 
-double dBessely_n(int m, double z)
+double dBessel_Yn(int m, double z)
 {
   if(m==0)
-	return( - Bessely_n(1,z)); 
+	return( - Bessel_Yn(1,z)); 
   else
-	return((Bessely_n(m-1,z)-Bessely_n(m+1,z))/2.);
+	return((Bessel_Yn(m-1,z)-Bessel_Yn(m+1,z))/2.);
 }
 
-double dBesselk_n(int m, double z)
+double dBessel_Kn(int m, double z)
 {
   if(m==0)
-	return( - Besselk_n(1,z));
+	return( - Bessel_Kn(1,z));
   else
-	return((-Besselk_n(m-1,z)-Besselk_n(m+1,z))/2.);
+	return((-Bessel_Kn(m-1,z)-Bessel_Kn(m+1,z))/2.);
 }
 
-double dBesseli_n(int m, double z)
+double dBessel_In(int m, double z)
 {
   if(m==0)
-	return( Besseli_n(1,z));
+	return( Bessel_In(1,z));
   else
-	return(( Besseli_n(m-1,z) + Besseli_n(m+1,z))/2.);
+	return(( Bessel_In(m-1,z) + Bessel_In(m+1,z))/2.);
 }
 
 // Hankel Functions: argunemt : double, result: double Complex
-ZComplex dz0Besselh1_n(int m, double z)
+ZComplex dz0Bessel_H1n(int m, double z)
 {
   if(m==0)
-	return( - z0Besselh1_n(1,z)); 
+	return( - z0Bessel_H1n(1,z)); 
   else
-	return((z0Besselh1_n(m-1,z)-z0Besselh1_n(m+1,z))/2.);
+	return((z0Bessel_H1n(m-1,z)-z0Bessel_H1n(m+1,z))/2.);
 }
 
-ZComplex dz0Besselh2_n(int m, double z)
+ZComplex dz0Bessel_H2n(int m, double z)
 {
   if(m==0)
-	return( - z0Besselh2_n(1,z)); 
+	return( - z0Bessel_H2n(1,z)); 
   else
-	return((z0Besselh2_n(m-1,z)-z0Besselh2_n(m+1,z))/2.);
+	return((z0Bessel_H2n(m-1,z)-z0Bessel_H2n(m+1,z))/2.);
 }
 
 // 
 // double complex
 // double
-ZComplex dzBesselj_n(int m, ZComplex z)
+ZComplex dzBessel_Jn(int m, ZComplex z)
 {
   if(m==0)
-	return( - zBesselj_n(1,z));
+	return( - zBessel_Jn(1,z));
   else
-	return((zBesselj_n(m-1,z)-zBesselj_n(m+1,z))/2.);
+	return((zBessel_Jn(m-1,z)-zBessel_Jn(m+1,z))/2.);
 }
 
-ZComplex dzBessely_n(int m, ZComplex z)
+ZComplex dzBessel_Yn(int m, ZComplex z)
 {
   if(m==0)
-	return( - zBessely_n(1,z)); 
+	return( - zBessel_Yn(1,z)); 
   else
-	return((zBessely_n(m-1,z)-zBessely_n(m+1,z))/2.);
+	return((zBessel_Yn(m-1,z)-zBessel_Yn(m+1,z))/2.);
 }
 
-ZComplex dzBesselk_n(int m, ZComplex z)
+ZComplex dzBessel_Kn(int m, ZComplex z)
 {
   if(m==0)
-	return( - zBesselk_n(1,z));
+	return( - zBessel_Kn(1,z));
   else
-	return((-zBesselk_n(m-1,z)-zBesselk_n(m+1,z))/2.);
+	return((-zBessel_Kn(m-1,z)-zBessel_Kn(m+1,z))/2.);
 }
 
-ZComplex dzBesseli_n(int m, ZComplex z)
+ZComplex dzBessel_In(int m, ZComplex z)
 {
   if(m==0)
-	return( zBesseli_n(1,z));
+	return( zBessel_In(1,z));
   else
-	return(( zBesseli_n(m-1,z) + zBesseli_n(m+1,z))/2.);
+	return(( zBessel_In(m-1,z) + zBessel_In(m+1,z))/2.);
 }
 
-ZComplex dzBesselh1_n(int m, ZComplex z)
+ZComplex dzBessel_H1n(int m, ZComplex z)
 {
   if(m==0)
-	return( - zBesselh1_n(1,z)); 
+	return( - zBessel_H1n(1,z)); 
   else
-	return(( zBesselh1_n(m-1,z)-zBesselh1_n(m+1,z))/2.);
+	return(( zBessel_H1n(m-1,z)-zBessel_H1n(m+1,z))/2.);
 }
 
-ZComplex dzBesselh2_n(int m, ZComplex z)
+ZComplex dzBessel_H2n(int m, ZComplex z)
 {
   if(m==0)
-	return( - zBesselh2_n(1,z)); 
+	return( - zBessel_H2n(1,z)); 
   else
-	return(( zBesselh2_n(m-1,z)-zBesselh2_n(m+1,z))/2.);
+	return(( zBessel_H2n(m-1,z)-zBessel_H2n(m+1,z))/2.);
 }
 
 

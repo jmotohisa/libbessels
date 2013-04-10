@@ -1,4 +1,4 @@
-SUBDIRS = bessel_wrap
+SUBDIRS = bessel_wrap guile
 
 lib_LTLIBRARIES = libbessels.la
 libbessels_la_SOURCES = dbessel.c \
