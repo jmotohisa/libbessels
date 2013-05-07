@@ -1,32 +1,32 @@
-noinst_PROGRAMS = check1
-check1_sources = check1.c \
-	../dbessel.c \
-	../bessel_wrap/toms644_wrap.c ../bessel_wrap/hankel_gsl_wrap.c \
-	../bessel_wrap/toms644/cbsubs.f ../bessel_wrap/toms644/zbsubs.f \
-	../bessel_wrap/toms644/machcon.f ../bessel_wrap/toms644/xerror.f
+# noinst_PROGRAMS = check1
+# check1_SOURCES = check1.c \
+# 	../dbessel.c \
+# 	../bessel_wrap/toms644_wrap.c ../bessel_wrap/hankel_gsl_wrap.c \
+# 	../bessel_wrap/toms644/cbsubs.f ../bessel_wrap/toms644/zbsubs.f \
+# 	../bessel_wrap/toms644/machcon.f ../bessel_wrap/toms644/xerror.f
 # check1_LDADD = $(FLIBS)
 
-MY_SOURCES = check1.c \
-	../dbessel.c \
-	../bessel_wrap/toms644_wrap.c ../bessel_wrap/hankel_gsl_wrap.c \
-	../bessel_wrap/toms644/cbsubs.f ../bessel_wrap/toms644/zbsubs.f \
-	../bessel_wrap/toms644/machcon.f ../bessel_wrap/toms644/xerror.f
+# MY_SOURCES = check1.c \
+# 	../dbessel.c \
+# 	../bessel_wrap/toms644_wrap.c ../bessel_wrap/hankel_gsl_wrap.c \
+# 	../bessel_wrap/toms644/cbsubs.f ../bessel_wrap/toms644/zbsubs.f \
+# 	../bessel_wrap/toms644/machcon.f ../bessel_wrap/toms644/xerror.f
 
-MY_LIBS    =         # extra libs you need go here
-MY_LDFLAGS =         # extra -L flags go here
-MY_CPPFLAGS =        # extra -I include flags go here
-MY_DEFS =            # extra -D define flags go here
-MY_CFLAGS = -Wall -gdwarf-2
-MY_FFLAGS = -Wall -gdwarf-2 -fno-second-underscore
+# MY_LIBS    =         # extra libs you need go here
+# MY_LDFLAGS =         # extra -L flags go here
+# MY_CPPFLAGS =        # extra -I include flags go here
+# MY_DEFS =            # extra -D define flags go here
+# MY_CFLAGS = -Wall -gdwarf-2
+# MY_FFLAGS = -Wall -gdwarf-2 -fno-second-underscore
 
-CHECK1_SOURCES = $(MY_SOURCES)
-# nodist_CHECK1_SOURCES = main.c ctl-io.h ctl-io.c
-# BUILT_SOURCES = $(nodist_CHECK1_SOURCES)
-CHECK1_LDADD = $(MY_LIBS)
-CHECK1_LDFLAGS = $(MY_LDFLAGS)
-CHECK1_CFLAGS = $(CFLAGS) $(MY_CFLAGS)
-CHECK1_CPPFLAGS = $(MY_CPPFLAGS) $(MY_DEFS)
-CHECK1_FFLAGS = $(MY_FFLAGS)
+# CHECK1_SOURCES = $(MY_SOURCES)
+# # nodist_CHECK1_SOURCES = main.c ctl-io.h ctl-io.c
+# # BUILT_SOURCES = $(nodist_CHECK1_SOURCES)
+# CHECK1_LDADD = $(MY_LIBS)
+# CHECK1_LDFLAGS = $(MY_LDFLAGS)
+# CHECK1_CFLAGS = $(CFLAGS) $(MY_CFLAGS)
+# CHECK1_CPPFLAGS = $(MY_CPPFLAGS) $(MY_DEFS)
+# CHECK1_FFLAGS = $(MY_FFLAGS)
 
 #####
 CHECK1_OBJECTS = check1.o \
