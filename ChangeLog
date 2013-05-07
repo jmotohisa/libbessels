@@ -1,3 +1,8 @@
+2013-04-10  Junichi Motohisa  <motohisa@ist.hokudai.ac.jp>
+
+	* guile/guileextensions.c: extensions for guile/libctl added
+	* dbessel.c (dBessel_Jn): function names are changed. (for e.g. Besselj_n -> Bessel_Jn)
+
 2013-04-03  Junichi Motohisa  <motohisa@ist.hokudai.ac.jp>
 
 	* dbessel.c: Libraries for Bessel functions and their derivatives, created and autoconfiscated

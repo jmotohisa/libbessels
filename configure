@@ -16406,7 +16406,7 @@ fi
 done
 
 
-ac_config_files="$ac_config_files Makefile bessel_wrap/Makefile bessel_wrap/toms644/Makefile guile/Makefile guile/include_libbessels.scm"
+ac_config_files="$ac_config_files Makefile bessel_wrap/Makefile bessel_wrap/toms644/Makefile guile/Makefile guile/include_libbessels.scm check/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -17493,6 +17493,7 @@ do
     "bessel_wrap/toms644/Makefile") CONFIG_FILES="$CONFIG_FILES bessel_wrap/toms644/Makefile" ;;
     "guile/Makefile") CONFIG_FILES="$CONFIG_FILES guile/Makefile" ;;
     "guile/include_libbessels.scm") CONFIG_FILES="$CONFIG_FILES guile/include_libbessels.scm" ;;
+    "check/Makefile") CONFIG_FILES="$CONFIG_FILES check/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

@@ -142,6 +142,6 @@ AC_C_CONST
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([pow sqrt])
 
-AC_CONFIG_FILES([Makefile bessel_wrap/Makefile bessel_wrap/toms644/Makefile guile/Makefile guile/include_libbessels.scm])
+AC_CONFIG_FILES([Makefile bessel_wrap/Makefile bessel_wrap/toms644/Makefile guile/Makefile guile/include_libbessels.scm check/Makefile])
 
 AC_OUTPUT
