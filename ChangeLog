@@ -1,3 +1,11 @@
+2013-05-08  Junichi Motohisa  <motohisa@vt001.localdomain>
+
+	* configure.ac: AC_PREREQ is changed from 2.69 to 2.63 to work on our CentOS6
+	* configure.ac: AC_CHECK_FUNC(cblas_cgemm, [], [AC_CHECK_LIB(gslcblas, cblas_cgemm)]) commented out since libgsl was not able to be found for some reason with AC_CHECK_LIB(gsl...)
+
+
+	* autoreconf --force --install
+
 2013-04-10  Junichi Motohisa  <motohisa@ist.hokudai.ac.jp>
 
 	* guile/guileextensions.c: extensions for guile/libctl added

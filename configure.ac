@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
+AC_PREREQ([2.63])
 AC_INIT(libbessels, 0.1a, motohisa@ist.hokudai.ac.jp)
 AC_CONFIG_SRCDIR([bessel_wrap/toms644/zbsubs.f])
 AC_CONFIG_HEADERS([config.h])
@@ -35,7 +35,7 @@ fi
 ##############################################################################
 # GNU Scientific Library
 
-# AC_CHECK_FUNC(cblas_cgemm, [], [AC_CHECK_LIB(gslcblas, cblas_cgemm)])
+AC_CHECK_FUNC(cblas_cgemm, [], [AC_CHECK_LIB(gslcblas, cblas_cgemm)])
 
 AC_CHECK_LIB(gsl, gsl_sf_bessel_Jn, [],
 	[AC_MSG_ERROR([GNU GSL library does not exist.])])
