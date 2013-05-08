@@ -1587,7 +1587,7 @@ C                 ARGUMENT AND NONNEGATIVE ORDER BY D. E. AMOS, ACM
 C                 TRANS. MATH. SOFTWARE, VOL. 12, NO. 3, SEPTEMBER 1986,
 C                 PP 265-273.
 C
-C***ROUTINES CALLED  ZACAI,ZBKNU,ZEXP,ZSQRT,ZABS,I1MACH,D1MACH
+C***ROUTINES CALLED  ZACAI,ZBKNU,ZZEXP,ZZSQRT,ZABS,I1MACH,D1MACH
 C***END PROLOGUE  ZAIRY
 C     COMPLEX AI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
       EXTERNAL ZABS
@@ -1665,10 +1665,10 @@ C-----------------------------------------------------------------------
       AIR = S1R*C1 - C2*(ZR*S2R-ZI*S2I)
       AII = S1I*C1 - C2*(ZR*S2I+ZI*S2R)
       IF (KODE.EQ.1) RETURN
-      CALL ZSQRT(ZR, ZI, STR, STI)
+      CALL ZZSQRT(ZR, ZI, STR, STI)
       ZTAR = TTH*(ZR*STR-ZI*STI)
       ZTAI = TTH*(ZR*STI+ZI*STR)
-      CALL ZEXP(ZTAR, ZTAI, STR, STI)
+      CALL ZZEXP(ZTAR, ZTAI, STR, STI)
       PTR = AIR*STR - AII*STI
       AII = AIR*STI + AII*STR
       AIR = PTR
@@ -1684,10 +1684,10 @@ C-----------------------------------------------------------------------
       AII = AII + CC*(STR*ZI+STI*ZR)
    60 CONTINUE
       IF (KODE.EQ.1) RETURN
-      CALL ZSQRT(ZR, ZI, STR, STI)
+      CALL ZZSQRT(ZR, ZI, STR, STI)
       ZTAR = TTH*(ZR*STR-ZI*STI)
       ZTAI = TTH*(ZR*STI+ZI*STR)
-      CALL ZEXP(ZTAR, ZTAI, STR, STI)
+      CALL ZZEXP(ZTAR, ZTAI, STR, STI)
       PTR = STR*AIR - STI*AII
       AII = STR*AII + STI*AIR
       AIR = PTR
@@ -1729,7 +1729,7 @@ C-----------------------------------------------------------------------
       IF (AZ.GT.AA) GO TO 260
       AA=DSQRT(AA)
       IF (AZ.GT.AA) IERR=3
-      CALL ZSQRT(ZR, ZI, CSQR, CSQI)
+      CALL ZZSQRT(ZR, ZI, CSQR, CSQI)
       ZTAR = TTH*(ZR*CSQR-ZI*CSQI)
       ZTAI = TTH*(ZR*CSQI+ZI*CSQR)
 C-----------------------------------------------------------------------
@@ -1976,7 +1976,7 @@ C                 ARGUMENT AND NONNEGATIVE ORDER BY D. E. AMOS, ACM
 C                 TRANS. MATH. SOFTWARE, VOL. 12, NO. 3, SEPTEMBER 1986,
 C                 PP 265-273.
 C
-C***ROUTINES CALLED  ZBINU,ZABS,ZDIV,ZSQRT,D1MACH,I1MACH
+C***ROUTINES CALLED  ZBINU,ZABS,ZDIV,ZZSQRT,D1MACH,I1MACH
 C***END PROLOGUE  ZBIRY
 C     COMPLEX BI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
       EXTERNAL ZABS
@@ -2054,7 +2054,7 @@ C-----------------------------------------------------------------------
       BIR = C1*S1R + C2*(ZR*S2R-ZI*S2I)
       BII = C1*S1I + C2*(ZR*S2I+ZI*S2R)
       IF (KODE.EQ.1) RETURN
-      CALL ZSQRT(ZR, ZI, STR, STI)
+      CALL ZZSQRT(ZR, ZI, STR, STI)
       ZTAR = TTH*(ZR*STR-ZI*STI)
       ZTAI = TTH*(ZR*STI+ZI*STR)
       AA = ZTAR
@@ -2074,7 +2074,7 @@ C-----------------------------------------------------------------------
       BII = BII + CC*(STR*ZI+STI*ZR)
    60 CONTINUE
       IF (KODE.EQ.1) RETURN
-      CALL ZSQRT(ZR, ZI, STR, STI)
+      CALL ZZSQRT(ZR, ZI, STR, STI)
       ZTAR = TTH*(ZR*STR-ZI*STI)
       ZTAI = TTH*(ZR*STI+ZI*STR)
       AA = ZTAR
@@ -2121,7 +2121,7 @@ C-----------------------------------------------------------------------
       IF (AZ.GT.AA) GO TO 260
       AA=DSQRT(AA)
       IF (AZ.GT.AA) IERR=3
-      CALL ZSQRT(ZR, ZI, CSQR, CSQI)
+      CALL ZZSQRT(ZR, ZI, CSQR, CSQI)
       ZTAR = TTH*(ZR*CSQR-ZI*CSQI)
       ZTAI = TTH*(ZR*CSQI+ZI*CSQR)
 C-----------------------------------------------------------------------
@@ -2256,14 +2256,14 @@ C***END PROLOGUE  ZDIV
       CI = CB
       RETURN
       END
-      SUBROUTINE ZSQRT(AR, AI, BR, BI)
-C***BEGIN PROLOGUE  ZSQRT
+      SUBROUTINE ZZSQRT(AR, AI, BR, BI)
+C***BEGIN PROLOGUE  ZZSQRT
 C***REFER TO  ZBESH,ZBESI,ZBESJ,ZBESK,ZBESY,ZAIRY,ZBIRY
 C
 C     DOUBLE PRECISION COMPLEX SQUARE ROOT, B=CSQRT(A)
 C
 C***ROUTINES CALLED  ZABS
-C***END PROLOGUE  ZSQRT
+C***END PROLOGUE  ZZSQRT
       EXTERNAL ZABS
       DOUBLE PRECISION AR, AI, BR, BI, ZM, DTHETA, DPI, DRT
       DOUBLE PRECISION ZABS
@@ -2301,14 +2301,14 @@ C***END PROLOGUE  ZSQRT
       BI = -ZM*DRT
       RETURN
       END
-      SUBROUTINE ZEXP(AR, AI, BR, BI)
-C***BEGIN PROLOGUE  ZEXP
+      SUBROUTINE ZZEXP(AR, AI, BR, BI)
+C***BEGIN PROLOGUE  ZZEXP
 C***REFER TO  ZBESH,ZBESI,ZBESJ,ZBESK,ZBESY,ZAIRY,ZBIRY
 C
 C     DOUBLE PRECISION COMPLEX EXPONENTIAL FUNCTION B=EXP(A)
 C
 C***ROUTINES CALLED  (NONE)
-C***END PROLOGUE  ZEXP
+C***END PROLOGUE  ZZEXP
       DOUBLE PRECISION AR, AI, BR, BI, ZM, CA, CB
       ZM = DEXP(AR)
       CA = ZM*DCOS(AI)
@@ -2317,14 +2317,14 @@ C***END PROLOGUE  ZEXP
       BI = CB
       RETURN
       END
-      SUBROUTINE ZLOG(AR, AI, BR, BI, IERR)
-C***BEGIN PROLOGUE  ZLOG
+      SUBROUTINE ZZLOG(AR, AI, BR, BI, IERR)
+C***BEGIN PROLOGUE  ZZLOG
 C***REFER TO  ZBESH,ZBESI,ZBESJ,ZBESK,ZBESY,ZAIRY,ZBIRY
 C
 C     DOUBLE PRECISION COMPLEX LOGARITHM B=CLOG(A)
 C     IERR=0,NORMAL RETURN      IERR=1, Z=CMPLX(0.0,0.0)
 C***ROUTINES CALLED  ZABS
-C***END PROLOGUE  ZLOG
+C***END PROLOGUE  ZZLOG
       EXTERNAL ZABS
       DOUBLE PRECISION AR, AI, BR, BI, ZM, DTHETA, DPI, DHPI
       DOUBLE PRECISION ZABS
@@ -2397,7 +2397,7 @@ C
 C     ZBKNU COMPUTES THE K BESSEL FUNCTION IN THE RIGHT HALF Z PLANE.
 C
 C***ROUTINES CALLED  DGAMLN,I1MACH,D1MACH,ZKSCL,ZSHCH,ZUCHK,ZABS,ZDIV,
-C                    ZEXP,ZLOG,ZMLT,ZSQRT
+C                    ZZEXP,ZZLOG,ZMLT,ZZSQRT
 C***END PROLOGUE  ZBKNU
 C
       EXTERNAL ZABS
@@ -2460,7 +2460,7 @@ C-----------------------------------------------------------------------
 C     SERIES FOR CABS(Z).LE.R1
 C-----------------------------------------------------------------------
       FC = 1.0D0
-      CALL ZLOG(RZR, RZI, SMUR, SMUI, IDUM)
+      CALL ZZLOG(RZR, RZI, SMUR, SMUI, IDUM)
       FMUR = SMUR*DNU
       FMUI = SMUI*DNU
       CALL ZSHCH(FMUR, FMUI, CSHR, CSHI, CCHR, CCHI)
@@ -2496,7 +2496,7 @@ C-----------------------------------------------------------------------
       G2 = (T1+T2)*0.5D0
       FR = FC*(CCHR*G1+SMUR*G2)
       FI = FC*(CCHI*G1+SMUI*G2)
-      CALL ZEXP(FMUR, FMUI, STR, STI)
+      CALL ZZEXP(FMUR, FMUI, STR, STI)
       PR = 0.5D0*STR/T2
       PI = 0.5D0*STI/T2
       CALL ZDIV(0.5D0, 0.0D0, STR, STI, PTR, PTI)
@@ -2543,7 +2543,7 @@ C-----------------------------------------------------------------------
       YR(1) = S1R
       YI(1) = S1I
       IF (KODED.EQ.1) RETURN
-      CALL ZEXP(ZR, ZI, STR, STI)
+      CALL ZZEXP(ZR, ZI, STR, STI)
       CALL ZMLT(S1R, S1I, STR, STI, YR(1), YI(1))
       RETURN
 C-----------------------------------------------------------------------
@@ -2590,7 +2590,7 @@ C-----------------------------------------------------------------------
       S1R = S1R*STR
       S1I = S1I*STR
       IF (KODED.EQ.1) GO TO 210
-      CALL ZEXP(ZR, ZI, FR, FI)
+      CALL ZZEXP(ZR, ZI, FR, FI)
       CALL ZMLT(S1R, S1I, FR, FI, S1R, S1I)
       CALL ZMLT(S2R, S2I, FR, FI, S2R, S2I)
       GO TO 210
@@ -2601,7 +2601,7 @@ C     KODED=2 AND A TEST FOR ON SCALE VALUES IS MADE DURING FORWARD
 C     RECURSION
 C-----------------------------------------------------------------------
   110 CONTINUE
-      CALL ZSQRT(ZR, ZI, STR, STI)
+      CALL ZZSQRT(ZR, ZI, STR, STI)
       CALL ZDIV(RTHPI, CZEROI, STR, STI, COEFR, COEFI)
       KFLAG = 2
       IF (KODED.EQ.2) GO TO 120
@@ -2868,7 +2868,7 @@ C-----------------------------------------------------------------------
         ALAS = DLOG(AS)
         P2R = -ZDR+ALAS
         IF(P2R.LT.(-ELIM)) GO TO 263
-        CALL ZLOG(S2R,S2I,STR,STI,IDUM)
+        CALL ZZLOG(S2R,S2I,STR,STI,IDUM)
         P2R = -ZDR+STR
         P2I = -ZDI+STI
         P2M = DEXP(P2R)/TOL
@@ -2966,7 +2966,7 @@ C     SET K FUNCTIONS TO ZERO ON UNDERFLOW, CONTINUE RECURRENCE
 C     ON SCALED FUNCTIONS UNTIL TWO MEMBERS COME ON SCALE, THEN
 C     RETURN WITH MIN(NZ+2,N) VALUES SCALED BY 1/TOL.
 C
-C***ROUTINES CALLED  ZUCHK,ZABS,ZLOG
+C***ROUTINES CALLED  ZUCHK,ZABS,ZZLOG
 C***END PROLOGUE  ZKSCL
 C     COMPLEX CK,CS,CY,CZERO,RZ,S1,S2,Y,ZR,ZD,CELM
       EXTERNAL ZABS
@@ -2992,7 +2992,7 @@ C
         YR(I) = ZEROR
         YI(I) = ZEROI
         IF (ACS.LT.(-ELIM)) GO TO 10
-        CALL ZLOG(S1R, S1I, CSR, CSI, IDUM)
+        CALL ZZLOG(S1R, S1I, CSR, CSI, IDUM)
         CSR = CSR - ZRR
         CSI = CSI - ZRI
         STR = DEXP(CSR)/TOL
@@ -3046,7 +3046,7 @@ C
         YR(I) = ZEROR
         YI(I) = ZEROI
         IF (ACS.LT.(-ELIM)) GO TO 25
-        CALL ZLOG(S2R, S2I, CSR, CSI, IDUM)
+        CALL ZZLOG(S2R, S2I, CSR, CSI, IDUM)
         CSR = CSR - ZDR
         CSI = CSI - ZDI
         STR = DEXP(CSR)/TOL
@@ -3248,7 +3248,7 @@ C     MAGNITUDE, BUT FOR KODE=2 THEY CAN BE OF THE SAME ORDER
 C     OF MAGNITUDE AND THE MAXIMUM MUST BE AT LEAST ONE
 C     PRECISION ABOVE THE UNDERFLOW LIMIT.
 C
-C***ROUTINES CALLED  ZABS,ZEXP,ZLOG
+C***ROUTINES CALLED  ZABS,ZZEXP,ZZLOG
 C***END PROLOGUE  ZS1S2
 C     COMPLEX CZERO,C1,S1,S1D,S2,ZR
       EXTERNAL ZABS
@@ -3268,10 +3268,10 @@ C     COMPLEX CZERO,C1,S1,S1D,S2,ZR
       S1I = ZEROI
       AS1 = ZEROR
       IF (ALN.LT.(-ALIM)) GO TO 10
-      CALL ZLOG(S1DR, S1DI, C1R, C1I, IDUM)
+      CALL ZZLOG(S1DR, S1DI, C1R, C1I, IDUM)
       C1R = C1R - ZRR - ZRR
       C1I = C1I - ZRI - ZRI
-      CALL ZEXP(C1R, C1I, S1R, S1I)
+      CALL ZZEXP(C1R, C1I, S1R, S1I)
       AS1 = ZABS(S1R,S1I)
       IUF = IUF + 1
    10 CONTINUE
@@ -3327,7 +3327,7 @@ C
 C     ZMLRI COMPUTES THE I BESSEL FUNCTION FOR RE(Z).GE.0.0 BY THE
 C     MILLER ALGORITHM NORMALIZED BY A NEUMANN SERIES.
 C
-C***ROUTINES CALLED  DGAMLN,D1MACH,ZABS,ZEXP,ZLOG,ZMLT
+C***ROUTINES CALLED  DGAMLN,D1MACH,ZABS,ZZEXP,ZZLOG,ZMLT
 C***END PROLOGUE  ZMLRI
 C     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
       EXTERNAL ZABS
@@ -3495,7 +3495,7 @@ C-----------------------------------------------------------------------
       PTR = ZR
       PTI = ZI
       IF (KODE.EQ.2) PTR = ZEROR
-      CALL ZLOG(RZR, RZI, STR, STI, IDUM)
+      CALL ZZLOG(RZR, RZI, STR, STI, IDUM)
       P1R = -FNF*STR + PTR
       P1I = -FNF*STI + PTI
       AP = DGAMLN(1.0D0+FNF,IDUM)
@@ -3509,7 +3509,7 @@ C-----------------------------------------------------------------------
       P2I = P2I + SUMI
       AP = ZABS(P2R,P2I)
       P1R = 1.0D0/AP
-      CALL ZEXP(PTR, PTI, STR, STI)
+      CALL ZZEXP(PTR, PTI, STR, STI)
       CKR = STR*P1R
       CKI = STI*P1R
       PTR = P2R*P1R
@@ -3633,7 +3633,7 @@ C     DUE TO UNDERFLOW. NZ.LT.0 MEANS UNDERFLOW OCCURRED, BUT THE
 C     CONDITION CABS(Z).LE.2*SQRT(FNU+1) WAS VIOLATED AND THE
 C     COMPUTATION MUST BE COMPLETED IN ANOTHER ROUTINE WITH N=N-ABS(NZ).
 C
-C***ROUTINES CALLED  DGAMLN,D1MACH,ZUCHK,ZABS,ZDIV,ZLOG,ZMLT
+C***ROUTINES CALLED  DGAMLN,D1MACH,ZUCHK,ZABS,ZDIV,ZZLOG,ZMLT
 C***END PROLOGUE  ZSERI
 C     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
       EXTERNAL ZABS
@@ -3663,7 +3663,7 @@ C
    10 CONTINUE
       ACZ = ZABS(CZR,CZI)
       NN = N
-      CALL ZLOG(HZR, HZI, CKR, CKI, IDUM)
+      CALL ZZLOG(HZR, HZI, CKR, CKI, IDUM)
    20 CONTINUE
       DFNU = FNU + DBLE(FLOAT(NN-1))
       FNUP = DFNU + 1.0D0
@@ -3821,7 +3821,7 @@ C     MEANS OF THE ASYMPTOTIC EXPANSION FOR LARGE CABS(Z) IN THE
 C     REGION CABS(Z).GT.MAX(RL,FNU*FNU/2). NZ=0 IS A NORMAL RETURN.
 C     NZ.LT.0 INDICATES AN OVERFLOW ON KODE=1.
 C
-C***ROUTINES CALLED  D1MACH,ZABS,ZDIV,ZEXP,ZMLT,ZSQRT
+C***ROUTINES CALLED  D1MACH,ZABS,ZDIV,ZZEXP,ZMLT,ZZSQRT
 C***END PROLOGUE  ZASYI
 C     COMPLEX AK1,CK,CONE,CS1,CS2,CZ,CZERO,DK,EZ,P1,RZ,S2,Y,Z
       EXTERNAL ZABS
@@ -3849,7 +3849,7 @@ C-----------------------------------------------------------------------
       STI = -ZI*RAZ
       AK1R = RTPI*STR*RAZ
       AK1I = RTPI*STI*RAZ
-      CALL ZSQRT(AK1R, AK1I, AK1R, AK1I)
+      CALL ZZSQRT(AK1R, AK1I, AK1R, AK1I)
       CZR = ZR
       CZI = ZI
       IF (KODE.NE.2) GO TO 10
@@ -3861,7 +3861,7 @@ C-----------------------------------------------------------------------
       KODED = 1
       IF ((DABS(CZR).GT.ALIM) .AND. (N.GT.2)) GO TO 20
       KODED = 0
-      CALL ZEXP(CZR, CZI, STR, STI)
+      CALL ZZEXP(CZR, CZI, STR, STI)
       CALL ZMLT(AK1R, AK1I, STR, STI, AK1R, AK1I)
    20 CONTINUE
       FDN = 0.0D0
@@ -3934,7 +3934,7 @@ C-----------------------------------------------------------------------
         IF (ZR+ZR.GE.ELIM) GO TO 60
         TZR = ZR + ZR
         TZI = ZI + ZI
-        CALL ZEXP(-TZR, -TZI, STR, STI)
+        CALL ZZEXP(-TZR, -TZI, STR, STI)
         CALL ZMLT(STR, STI, P1R, P1I, STR, STI)
         CALL ZMLT(STR, STI, CS2R, CS2I, STR, STI)
         S2R = S2R + STR
@@ -3963,7 +3963,7 @@ C-----------------------------------------------------------------------
         K = K - 1
    80 CONTINUE
       IF (KODED.EQ.0) RETURN
-      CALL ZEXP(CZR, CZI, CKR, CKI)
+      CALL ZZEXP(CZR, CZI, CKR, CKI)
       DO 90 I=1,NN
         STR = YR(I)*CKR - YI(I)*CKI
         YI(I) = YR(I)*CKI + YI(I)*CKR
@@ -4002,7 +4002,7 @@ C     IKFLG=2 AND NUF.EQ.N MEANS ALL Y VALUES WERE SET TO ZERO
 C     IKFLG=2 AND 0.LT.NUF.LT.N NOT CONSIDERED. Y MUST BE SET BY
 C             ANOTHER ROUTINE
 C
-C***ROUTINES CALLED  ZUCHK,ZUNHJ,ZUNIK,D1MACH,ZABS,ZLOG
+C***ROUTINES CALLED  ZUCHK,ZUNHJ,ZUNIK,D1MACH,ZABS,ZZLOG
 C***END PROLOGUE  ZUOIK
 C     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
 C    *ZR
@@ -4097,11 +4097,11 @@ C-----------------------------------------------------------------------
       RETURN
   110 CONTINUE
       ASCLE = 1.0D+3*D1MACH(1)/TOL
-      CALL ZLOG(PHIR, PHII, STR, STI, IDUM)
+      CALL ZZLOG(PHIR, PHII, STR, STI, IDUM)
       CZR = CZR + STR
       CZI = CZI + STI
       IF (IFORM.EQ.1) GO TO 120
-      CALL ZLOG(ARGR, ARGI, STR, STI, IDUM)
+      CALL ZZLOG(ARGR, ARGI, STR, STI, IDUM)
       CZR = CZR - 0.25D0*STR - AIC
       CZI = CZI - 0.25D0*STI
   120 CONTINUE
@@ -4153,11 +4153,11 @@ C-----------------------------------------------------------------------
       GO TO 140
   190 CONTINUE
       ASCLE = 1.0D+3*D1MACH(1)/TOL
-      CALL ZLOG(PHIR, PHII, STR, STI, IDUM)
+      CALL ZZLOG(PHIR, PHII, STR, STI, IDUM)
       CZR = CZR + STR
       CZI = CZI + STI
       IF (IFORM.EQ.1) GO TO 200
-      CALL ZLOG(ARGR, ARGI, STR, STI, IDUM)
+      CALL ZZLOG(ARGR, ARGI, STR, STI, IDUM)
       CZR = CZR - 0.25D0*STR - AIC
       CZI = CZI - 0.25D0*STI
   200 CONTINUE
@@ -4824,7 +4824,7 @@ C        1 OR 2 WITH NO CHANGE IN INIT. CWRK IS A COMPLEX WORK
 C        ARRAY. IPMTR=0 COMPUTES ALL PARAMETERS. IPMTR=1 COMPUTES PHI,
 C        ZETA1,ZETA2.
 C
-C***ROUTINES CALLED  ZDIV,ZLOG,ZSQRT,D1MACH
+C***ROUTINES CALLED  ZDIV,ZZLOG,ZZSQRT,D1MACH
 C***END PROLOGUE  ZUNIK
 C     COMPLEX CFN,CON,CONE,CRFN,CWRK,CZERO,PHI,S,SR,SUM,T,T2,ZETA1,
 C    *ZETA2,ZN,ZR
@@ -4937,11 +4937,11 @@ C-----------------------------------------------------------------------
       TI = ZRI*RFN
       SR = CONER + (TR*TR-TI*TI)
       SI = CONEI + (TR*TI+TI*TR)
-      CALL ZSQRT(SR, SI, SRR, SRI)
+      CALL ZZSQRT(SR, SI, SRR, SRI)
       STR = CONER + SRR
       STI = CONEI + SRI
       CALL ZDIV(STR, STI, TR, TI, ZNR, ZNI)
-      CALL ZLOG(ZNR, ZNI, STR, STI, IDUM)
+      CALL ZZLOG(ZNR, ZNI, STR, STI, IDUM)
       ZETA1R = FNU*STR
       ZETA1I = FNU*STI
       ZETA2R = FNU*SRR
@@ -4949,7 +4949,7 @@ C-----------------------------------------------------------------------
       CALL ZDIV(CONER, CONEI, SRR, SRI, TR, TI)
       SRR = TR*RFN
       SRI = TI*RFN
-      CALL ZSQRT(SRR, SRI, CWRKR(16), CWRKI(16))
+      CALL ZZSQRT(SRR, SRI, CWRKR(16), CWRKI(16))
       PHIR = CWRKR(16)*CON(IKFLG)
       PHII = CWRKI(16)*CON(IKFLG)
       IF (IPMTR.NE.0) RETURN
@@ -5046,7 +5046,7 @@ C         MCONJ=SIGN OF AIMAG(Z), BUT IS AMBIGUOUS WHEN Z IS REAL AND
 C         MUST BE SPECIFIED. IPMTR=0 RETURNS ALL PARAMETERS. IPMTR=
 C         1 COMPUTES ALL EXCEPT ASUM AND BSUM.
 C
-C***ROUTINES CALLED  ZABS,ZDIV,ZLOG,ZSQRT,D1MACH
+C***ROUTINES CALLED  ZABS,ZDIV,ZZLOG,ZZSQRT,D1MACH
 C***END PROLOGUE  ZUNHJ
 C     COMPLEX ARG,ASUM,BSUM,CFNU,CONE,CR,CZERO,DR,P,PHI,PRZTH,PTFN,
 C    *RFN13,RTZTA,RZTH,SUMA,SUMB,TFN,T2,UP,W,W2,Z,ZA,ZB,ZC,ZETA,ZETA1,
@@ -5502,8 +5502,8 @@ C-----------------------------------------------------------------------
       ZETAI = W2R*SUMAI + W2I*SUMAR
       ARGR = ZETAR*FN23
       ARGI = ZETAI*FN23
-      CALL ZSQRT(SUMAR, SUMAI, ZAR, ZAI)
-      CALL ZSQRT(W2R, W2I, STR, STI)
+      CALL ZZSQRT(SUMAR, SUMAI, ZAR, ZAI)
+      CALL ZZSQRT(W2R, W2I, STR, STI)
       ZETA2R = STR*FNU
       ZETA2I = STI*FNU
       STR = CONER + EX2*(ZETAR*ZAR-ZETAI*ZAI)
@@ -5512,7 +5512,7 @@ C-----------------------------------------------------------------------
       ZETA1I = STR*ZETA2I + STI*ZETA2R
       ZAR = ZAR + ZAR
       ZAI = ZAI + ZAI
-      CALL ZSQRT(ZAR, ZAI, STR, STI)
+      CALL ZZSQRT(ZAR, ZAI, STR, STI)
       PHIR = STR*RFN13
       PHII = STI*RFN13
       IF (IPMTR.EQ.1) GO TO 120
@@ -5583,13 +5583,13 @@ C-----------------------------------------------------------------------
 C     CABS(W2).GT.0.25D0
 C-----------------------------------------------------------------------
   130 CONTINUE
-      CALL ZSQRT(W2R, W2I, WR, WI)
+      CALL ZZSQRT(W2R, W2I, WR, WI)
       IF (WR.LT.0.0D0) WR = 0.0D0
       IF (WI.LT.0.0D0) WI = 0.0D0
       STR = CONER + WR
       STI = WI
       CALL ZDIV(STR, STI, ZBR, ZBI, ZAR, ZAI)
-      CALL ZLOG(ZAR, ZAI, ZCR, ZCI, IDUM)
+      CALL ZZLOG(ZAR, ZAI, ZCR, ZCI, IDUM)
       IF (ZCI.LT.0.0D0) ZCI = 0.0D0
       IF (ZCI.GT.HPI) ZCI = HPI
       IF (ZCR.LT.0.0D0) ZCR = 0.0D0
@@ -5618,7 +5618,7 @@ C-----------------------------------------------------------------------
       CALL ZDIV(RTZTR, RTZTI, WR, WI, ZAR, ZAI)
       TZAR = ZAR + ZAR
       TZAI = ZAI + ZAI
-      CALL ZSQRT(TZAR, TZAI, STR, STI)
+      CALL ZZSQRT(TZAR, TZAI, STR, STI)
       PHIR = STR*RFN13
       PHII = STI*RFN13
       IF (IPMTR.EQ.1) GO TO 120

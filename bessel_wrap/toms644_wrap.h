@@ -18,32 +18,30 @@ typedef struct { float re, im; } my_Complex; /* complex numbers (conventional st
 typedef struct { double re, im; } my_ZComplex; /* complex numbers  (conventional style)! */
 #endif
 
-#ifdef __COMPLEX__
-#ifndef Complex
-#define Complex _Complex float
-#endif
-#ifndef ZComplex
-#define ZComplex _Complex double 
-#endif
-#ifndef re_complex
-#define re_complex(c) creal(c)
-#endif
-#ifndef im_complex
-#define im_complex(c) cimag(c)
-#endif
-#ifndef _CMPLX
-#define cmplx(x,y) ((x)+I*(y))
-#endif
-
-#else // if complex is not defined
-
-#define Complex my_Complex 
-#define ZComplex my_ZComplex 
-#define re_complex(c) ((c).re)
-#define im_complex(c) ((c).im)
-
-#ifndef _CMPLX
-#define _CMPLX
+#if defined(__COMPLEX__) || defined(_COMPLEX_H)
+ #ifndef Complex
+  #define Complex float _Complex
+ #endif
+ #ifndef ZComplex
+  #define ZComplex double _Complex
+ #endif
+ #ifndef re_complex
+  #define re_complex(c) creal(c)
+ #endif
+ #ifndef im_complex
+  #define im_complex(c) cimag(c)
+ #endif
+ #ifndef _CMPLX
+  #define cmplx(x,y) ((x)+I*(y))
+  #define zcmplx(x,y) ((x)+I*(y))
+ #endif
+#else
+ typedef struct { float re, im; } Complex; /* complex numbers! */
+ typedef struct { double re, im; } ZComplex; /* complex numbers! */
+ #define re_complex(c) ((c).re)
+ #define im_complex(c) ((c).im)
+ #ifndef _CMPLX
+  #define _CMPLX
 Complex cmplx(float x, float y)
 {
   Complex z;
@@ -59,7 +57,7 @@ ZComplex zcmplx(double x, double y)
   z.im = y;
   return (z);
 }
-#endif
+ #endif
 #endif
 
 #ifdef __cplusplus
