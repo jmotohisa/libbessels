@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.63])
-AC_INIT(libbessels, 0.1a, motohisa@ist.hokudai.ac.jp)
+AC_INIT([libbessels],[0.1a],[motohisa@ist.hokudai.ac.jp])
 AC_CONFIG_SRCDIR([bessel_wrap/toms644/zbsubs.f])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -20,7 +20,7 @@ AC_PROG_INSTALL
 AC_PROG_RANLIB
 
 # Checks for libraries.
-AM_PROG_LIBTOOL
+LT_INIT
 
 AC_CHECK_LIB([g2c], [main])
 AC_CHECK_LIB([m], [main])
@@ -69,51 +69,51 @@ AC_MSG_ERROR(Guile could not be found)
 
 AC_MSG_CHECKING([for gh_load])
 ok=yes
-AC_TRY_LINK([#include <guile/gh.h>
-], [gh_load(0);], [AC_DEFINE(HAVE_GH_LOAD, 1, [Define if we have gh_load.])], ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+]], [[gh_load(0);]])],[AC_DEFINE(HAVE_GH_LOAD, 1, [Define if we have gh_load.])],[ok=no])
 AC_MSG_RESULT($ok)
 
 AC_MSG_CHECKING([for gh_bool2scm])
 ok=yes
-AC_TRY_LINK([#include <guile/gh.h>
-], [gh_bool2scm(0);], [AC_DEFINE(HAVE_GH_BOOL2SCM, 1, [Define if we have gh_bool2scm])], ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+]], [[gh_bool2scm(0);]])],[AC_DEFINE(HAVE_GH_BOOL2SCM, 1, [Define if we have gh_bool2scm])],[ok=no])
 AC_MSG_RESULT($ok)
 
 AC_MSG_CHECKING([for gh_vector_ref])
 ok=yes
-AC_TRY_LINK([#include <guile/gh.h>
-], [gh_vector_ref(0,0);], [AC_DEFINE(HAVE_GH_VECTOR_REF, 1, [Define if we have gh_vector_ref])], ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+]], [[gh_vector_ref(0,0);]])],[AC_DEFINE(HAVE_GH_VECTOR_REF, 1, [Define if we have gh_vector_ref])],[ok=no])
 AC_MSG_RESULT($ok)
 
 AC_MSG_CHECKING([for gh_list_ref])
 ok=yes
-AC_TRY_LINK([#include <guile/gh.h>
-], [gh_list_ref(0,0);], [AC_DEFINE(HAVE_GH_LIST_REF, 1, [Define if we have gh_list_ref])], ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+]], [[gh_list_ref(0,0);]])],[AC_DEFINE(HAVE_GH_LIST_REF, 1, [Define if we have gh_list_ref])],[ok=no])
 AC_MSG_RESULT($ok)
 
 AC_MSG_CHECKING([for gh_length])
 ok=yes
-AC_TRY_LINK([#include <guile/gh.h>
-], [gh_length(0);], [AC_DEFINE(HAVE_GH_LENGTH, 1, [Define if we have gh_length])], ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+]], [[gh_length(0);]])],[AC_DEFINE(HAVE_GH_LENGTH, 1, [Define if we have gh_length])],[ok=no])
 AC_MSG_RESULT($ok)
 
 AC_MSG_CHECKING([for scm_flush_all_ports])
 ok=yes
-AC_TRY_LINK([#include <guile/gh.h>
-], [scm_flush_all_ports();], [AC_DEFINE(HAVE_SCM_FLUSH_ALL_PORTS, 1, [Define if we have scm_flush_all_ports])], ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+]], [[scm_flush_all_ports();]])],[AC_DEFINE(HAVE_SCM_FLUSH_ALL_PORTS, 1, [Define if we have scm_flush_all_ports])],[ok=no])
 AC_MSG_RESULT($ok)
 
 AC_CHECK_FUNCS(scm_make_complex scm_variable_set_x scm_c_lookup scm_c_make_vector)
 
 AC_MSG_CHECKING([for SCM_COMPLEXP])
 ok=yes
-AC_TRY_LINK([#include <guile/gh.h>
-], [SCM x; SCM_COMPLEXP(x);], [AC_DEFINE(HAVE_SCM_COMPLEXP, 1, [Define if we have SCM_COMPLEXP])], ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+]], [[SCM x; SCM_COMPLEXP(x);]])],[AC_DEFINE(HAVE_SCM_COMPLEXP, 1, [Define if we have SCM_COMPLEXP])],[ok=no])
 AC_MSG_RESULT($ok)
 
 AC_MSG_CHECKING([whether gh_lookup works properly])
 ok=yes
-AC_TRY_RUN([
+AC_RUN_IFELSE([AC_LANG_SOURCE([[
 #include <stdlib.h>
 #include <guile/gh.h>
 void main_entry(int argc, char *argv[])
@@ -127,7 +127,7 @@ int main (int argc, char *argv[])
      gh_enter (argc, argv, main_entry);
      return EXIT_SUCCESS;
 }
-], [AC_DEFINE(GH_LOOKUP_OK, 1, [Define if gh_lookup works])], ok=no, ok=no)
+]])],[AC_DEFINE(GH_LOOKUP_OK, 1, [Define if gh_lookup works])],[ok=no],[ok=no])
 AC_MSG_RESULT($ok)
 
 ##################################################
