@@ -79,7 +79,8 @@ LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libbessels_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_libbessels_la_OBJECTS = dbessel.lo toms644_wrap.lo \
-	hankel_gsl_wrap.lo cbsubs.lo zbsubs.lo machcon.lo xerror.lo
+	hankel_gsl_wrap.lo cbsubs.lo zbsubs.lo xerror.lo i1mach.lo \
+	r1mach.lo d1mach.lo
 libbessels_la_OBJECTS = $(am_libbessels_la_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -275,8 +276,8 @@ SUBDIRS = bessel_wrap guile check
 lib_LTLIBRARIES = libbessels.la
 libbessels_la_SOURCES = dbessel.c \
           bessel_wrap/toms644_wrap.c bessel_wrap/hankel_gsl_wrap.c \
-          bessel_wrap/toms644/cbsubs.f bessel_wrap/toms644/zbsubs.f \
-          bessel_wrap/toms644/machcon.f bessel_wrap/toms644/xerror.f
+          bessel_wrap/toms644/cbsubs.f bessel_wrap/toms644/zbsubs.f bessel_wrap/toms644/xerror.f \
+          bessel_wrap/toms644/i1mach.f bessel_wrap/toms644/r1mach.f bessel_wrap/toms644/d1mach.f 
 
 libbessels_la_LIBADD = $(FLIBS)
 include_HEADERS = libbessels.h
@@ -432,11 +433,17 @@ cbsubs.lo: bessel_wrap/toms644/cbsubs.f
 zbsubs.lo: bessel_wrap/toms644/zbsubs.f
 	$(LIBTOOL)  --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o zbsubs.lo `test -f 'bessel_wrap/toms644/zbsubs.f' || echo '$(srcdir)/'`bessel_wrap/toms644/zbsubs.f
 
-machcon.lo: bessel_wrap/toms644/machcon.f
-	$(LIBTOOL)  --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o machcon.lo `test -f 'bessel_wrap/toms644/machcon.f' || echo '$(srcdir)/'`bessel_wrap/toms644/machcon.f
-
 xerror.lo: bessel_wrap/toms644/xerror.f
 	$(LIBTOOL)  --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o xerror.lo `test -f 'bessel_wrap/toms644/xerror.f' || echo '$(srcdir)/'`bessel_wrap/toms644/xerror.f
+
+i1mach.lo: bessel_wrap/toms644/i1mach.f
+	$(LIBTOOL)  --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o i1mach.lo `test -f 'bessel_wrap/toms644/i1mach.f' || echo '$(srcdir)/'`bessel_wrap/toms644/i1mach.f
+
+r1mach.lo: bessel_wrap/toms644/r1mach.f
+	$(LIBTOOL)  --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o r1mach.lo `test -f 'bessel_wrap/toms644/r1mach.f' || echo '$(srcdir)/'`bessel_wrap/toms644/r1mach.f
+
+d1mach.lo: bessel_wrap/toms644/d1mach.f
+	$(LIBTOOL)  --tag=F77 $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS) -c -o d1mach.lo `test -f 'bessel_wrap/toms644/d1mach.f' || echo '$(srcdir)/'`bessel_wrap/toms644/d1mach.f
 
 mostlyclean-libtool:
 	-rm -f *.lo

@@ -32,8 +32,8 @@
 CHECK1_OBJECTS = check1.o \
 	../dbessel.o \
 	../bessel_wrap/toms644_wrap.o ../bessel_wrap/hankel_gsl_wrap.o \
-	../bessel_wrap/toms644/cbsubs.o ../bessel_wrap/toms644/zbsubs.o \
-	../bessel_wrap/toms644/machcon.o ../bessel_wrap/toms644/xerror.o
+	../bessel_wrap/toms644/cbsubs.o ../bessel_wrap/toms644/zbsubs.o  ../bessel_wrap/toms644/xerror.o \
+        ../bessel_wrap/toms644/i1mach.o ../bessel_wrap/toms644/r1mach.o ../bessel_wrap/toms644/d1mach.o 
 ####
 
 check1: $(CHECK1_OBJECTS)

@@ -47,7 +47,8 @@ CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libtoms644_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
-am_libtoms644_la_OBJECTS = cbsubs.lo zbsubs.lo machcon.lo xerror.lo
+am_libtoms644_la_OBJECTS = cbsubs.lo zbsubs.lo i1mach.lo r1mach.lo \
+	d1mach.lo xerror.lo
 libtoms644_la_OBJECTS = $(am_libtoms644_la_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 F77COMPILE = $(F77) $(AM_FFLAGS) $(FFLAGS)
@@ -179,7 +180,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 noinst_LTLIBRARIES = libtoms644.la
-libtoms644_la_SOURCES = cbsubs.f zbsubs.f machcon.f xerror.f
+libtoms644_la_SOURCES = cbsubs.f zbsubs.f i1mach.f r1mach.f d1mach.f xerror.f
 libtoms644_la_LIBADD = $(FLIBS)
 all: all-am
 
