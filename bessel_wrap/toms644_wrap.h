@@ -82,19 +82,19 @@ extern void zbesy_(double *, double *, double *, int *, int *, double *, double 
 extern void zbiry_(double *, double *, int *, int *, double *, double *, int *);
 
 // Complex version
-GLOBAL Complex cBesselh1_n(int , Complex );
-GLOBAL Complex cBesselh2_n(int , Complex );
-GLOBAL Complex cBesseli_n(int , Complex );
-GLOBAL Complex cBesselj_n(int , Complex );
-GLOBAL Complex cBesselk_n(int , Complex );
-GLOBAL Complex cBessely_n(int , Complex );
+GLOBAL Complex cBessel_H1n(int , Complex );
+GLOBAL Complex cBessel_H2n(int , Complex );
+GLOBAL Complex cBessel_In(int , Complex );
+GLOBAL Complex cBessel_Jn(int , Complex );
+GLOBAL Complex cBessel_Kn(int , Complex );
+GLOBAL Complex cBessel_Yn(int , Complex );
 
-GLOBAL Complex cBesselh1(float , Complex );
-GLOBAL Complex cBesselh2(float , Complex );
-GLOBAL Complex cBesseli(float , Complex );
-GLOBAL Complex cBesselj(float , Complex );
-GLOBAL Complex cBesselk(float , Complex );
-GLOBAL Complex cBessely(float , Complex );
+GLOBAL Complex cBessel_H1(float , Complex );
+GLOBAL Complex cBessel_H2(float , Complex );
+GLOBAL Complex cBessel_I(float , Complex );
+GLOBAL Complex cBessel_J(float , Complex );
+GLOBAL Complex cBessel_K(float , Complex );
+GLOBAL Complex cBessel_Y(float , Complex );
 
 GLOBAL Complex cAiry(Complex );
 GLOBAL Complex cAirydz(Complex );
@@ -102,19 +102,19 @@ GLOBAL Complex cBiry(Complex );
 GLOBAL Complex cBirydz(Complex );
 
 // double complex
-GLOBAL ZComplex zBesselh1_n(int , ZComplex );
-GLOBAL ZComplex zBesselh2_n(int , ZComplex );
-GLOBAL ZComplex zBesseli_n(int , ZComplex );
-GLOBAL ZComplex zBesselj_n(int , ZComplex );
-GLOBAL ZComplex zBesselk_n(int , ZComplex );
-GLOBAL ZComplex zBessely_n(int , ZComplex );
+GLOBAL ZComplex zBessel_H1n(int , ZComplex );
+GLOBAL ZComplex zBessel_H2n(int , ZComplex );
+GLOBAL ZComplex zBessel_Jn(int , ZComplex );
+GLOBAL ZComplex zBessel_Yn(int , ZComplex );
+GLOBAL ZComplex zBessel_In(int , ZComplex );
+GLOBAL ZComplex zBessel_Kn(int , ZComplex );
   
-GLOBAL ZComplex zBesselh1(double , ZComplex );
-GLOBAL ZComplex zBesselh2(double , ZComplex );
-GLOBAL ZComplex zBesseli(double , ZComplex );
-GLOBAL ZComplex zbesselj(double , ZComplex );
-GLOBAL ZComplex zBesselk(double , ZComplex );
-GLOBAL ZComplex zBessely(double , ZComplex );
+GLOBAL ZComplex zBessel_H1(double , ZComplex );
+GLOBAL ZComplex zBessel_H2(double , ZComplex );
+GLOBAL ZComplex zBessel_I(double , ZComplex );
+GLOBAL ZComplex zbessel_J(double , ZComplex );
+GLOBAL ZComplex zBessel_K(double , ZComplex );
+GLOBAL ZComplex zBessel_Y(double , ZComplex );
 
 GLOBAL ZComplex zAiry(ZComplex );
 GLOBAL ZComplex zAirydz(ZComplex );

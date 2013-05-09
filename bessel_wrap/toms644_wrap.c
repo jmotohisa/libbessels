@@ -1,7 +1,9 @@
 /* toms644_wrap.c */
 
 /* Warpper library TOMS 644 Complex Bessel library 
-     Complex Bessel Functions with complex argurment
+     Complex Bessel Functions J_nue(z)/Y_nue(z)/I_nue(z)/K_nue(z)/H_nue^{1}(z)/H_nue^{2}
+	 with complex argurment z
+	 with non-negative nue
  */
 
 #include <complex.h>
@@ -88,7 +90,6 @@
 	cyr=fromMyZComplex(cyr0);											\
 	return(cyr);														\
   }
-
 
 #define FUNC_ZBESSELH_N(i)									\
   ZComplex zBessel_H##i##n(int n, ZComplex z)				\
