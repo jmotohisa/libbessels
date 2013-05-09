@@ -1,3 +1,7 @@
+2013-05-09  Junichi Motohisa  <motohisa@ist.hokudai.ac.jp>
+
+	* bessel_wrap/toms644_wrap.h : bug fixed
+
 2013-05-08  Junichi Motohisa  <motohisa@vt001.localdomain>
 
 	* bessel_wrap/toms644/d1mach.f (D1MACH): machon.f is replaced by d1mach.f/i1mach.f/i1mach.f which are taken from blas
