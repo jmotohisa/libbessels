@@ -14,38 +14,32 @@
 /* Define if F77 and FC dummy `main' functions are identical. */
 #undef FC_DUMMY_MAIN_EQ_F77
 
-/* Define if gh_lookup works */
-#undef GH_LOOKUP_OK
-
 /* Define to 1 if you have the <complex.h> header file. */
 #undef HAVE_COMPLEX_H
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
-/* Define if we have gh_bool2scm */
-#undef HAVE_GH_BOOL2SCM
-
-/* Define if we have gh_length */
-#undef HAVE_GH_LENGTH
-
-/* Define if we have gh_list_ref */
-#undef HAVE_GH_LIST_REF
-
-/* Define if we have gh_load. */
-#undef HAVE_GH_LOAD
-
-/* Define if we have gh_vector_ref */
-#undef HAVE_GH_VECTOR_REF
+/* Define to 1 if you have the <guile/gh.h> header file. */
+#undef HAVE_GUILE_GH_H
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `ctl' library (-lctl). */
+#undef HAVE_LIBCTL
+
+/* If we have the libctl_quiet variable */
+#undef HAVE_LIBCTL_QUIET
 
 /* Define to 1 if you have the `dl' library (-ldl). */
 #undef HAVE_LIBDL
 
 /* Define to 1 if you have the `g2c' library (-lg2c). */
 #undef HAVE_LIBG2C
+
+/* Define to 1 if you have the `gen' library (-lgen). */
+#undef HAVE_LIBGEN
 
 /* Define to 1 if you have the `gsl' library (-lgsl). */
 #undef HAVE_LIBGSL
@@ -55,6 +49,15 @@
 
 /* Define to 1 if you have the `guile' library (-lguile). */
 #undef HAVE_LIBGUILE
+
+/* Define to 1 if you have the <libguile.h> header file. */
+#undef HAVE_LIBGUILE_H
+
+/* Define to 1 if you have the `guile-ltdl' library (-lguile-ltdl). */
+#undef HAVE_LIBGUILE_LTDL
+
+/* Define to 1 if you have the `ltdl' library (-lltdl). */
+#undef HAVE_LIBLTDL
 
 /* Define to 1 if you have the `m' library (-lm). */
 #undef HAVE_LIBM
@@ -75,23 +78,17 @@
 /* Define to 1 if you have the `pow' function. */
 #undef HAVE_POW
 
-/* Define if we have SCM_COMPLEXP */
-#undef HAVE_SCM_COMPLEXP
+/* Define to 1 if you have the `scm_make_smob_type' function. */
+#undef HAVE_SCM_MAKE_SMOB_TYPE
 
-/* Define to 1 if you have the `scm_c_lookup' function. */
-#undef HAVE_SCM_C_LOOKUP
+/* define if we have SCM_NEWSMOB */
+#undef HAVE_SCM_NEWSMOB
 
-/* Define to 1 if you have the `scm_c_make_vector' function. */
-#undef HAVE_SCM_C_MAKE_VECTOR
+/* define if we have SCM_SMOB_DATA */
+#undef HAVE_SCM_SMOB_DATA
 
-/* Define if we have scm_flush_all_ports */
-#undef HAVE_SCM_FLUSH_ALL_PORTS
-
-/* Define to 1 if you have the `scm_make_complex' function. */
-#undef HAVE_SCM_MAKE_COMPLEX
-
-/* Define to 1 if you have the `scm_variable_set_x' function. */
-#undef HAVE_SCM_VARIABLE_SET_X
+/* define if we have SCM_SMOB_PREDICATE */
+#undef HAVE_SCM_SMOB_PREDICATE
 
 /* Define to 1 if you have the `sqrt' function. */
 #undef HAVE_SQRT
@@ -120,9 +117,6 @@
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
 #undef LT_OBJDIR
-
-/* Define to 1 if your C compiler doesn't accept -c and -o together. */
-#undef NO_MINUS_C_MINUS_O
 
 /* Name of package */
 #undef PACKAGE
