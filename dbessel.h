@@ -36,8 +36,12 @@ typedef struct { double re, im; } my_ZComplex; /* complex numbers  (conventional
   #define zcmplx(x,y) ((x)+I*(y))
  #endif
 #else
+#ifndef Complex
  typedef struct { float re, im; } Complex; /* complex numbers! */
+#endif
+#ifndef Zcomlex
  typedef struct { double re, im; } ZComplex; /* complex numbers! */
+#endif
  #define re_complex(c) ((c).re)
  #define im_complex(c) ((c).im)
  #ifndef _CMPLX

@@ -36,7 +36,7 @@
   {																		\
 	double _Complex zout;												\
 	zout= FUNC(scm_to_int(n),scm_to_double(x));							\
-	return scm_make_complex (creal(zout),cimag(zout));					\
+	return scm_from_complex (creal(zout),cimag(zout));					\
   }
 
 // for doube complex input, integer order, double complex output
@@ -47,7 +47,7 @@
 	double _Complex zin,zout;											\
 	zin=scm_c_real_part(x)+I*scm_c_imag_part(x);						\
 	zout= FUNC(scm_to_int(n),zin);										\
-	return scm_make_complex (creal(zout),cimag(zout));					\
+	return scm_from_complex (creal(zout),cimag(zout));					\
   }
 
 #define EXPORT_FUNC(func,i)										\
