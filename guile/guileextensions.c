@@ -21,7 +21,7 @@
 	return scm_from_double (gsl_sf_bessel_##J##n (scm_to_int(n),scm_to_double (x))); \
   }
 
-// for GSL function (double input, integer order, double ouput)
+// for GSL functoion (double input, integer order, double ouput)
 #define BESSEL_DND_WRAPPER(FUNC)										\
   SCM																	\
   FUNC##_guile_wrapper (SCM n, SCM x)									\

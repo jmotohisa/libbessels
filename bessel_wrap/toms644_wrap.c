@@ -13,10 +13,10 @@
 #include "toms644_wrap.h"
 
 #define FUNC_CBESSEL_N(j,J)					\
-  Complex cBessel_##J##n(int n, Complex z)	\
+  _Complex cBessel_##J##n(int n, _Complex z)	\
   {												\
   int nn,kode=1;								\
-  Complex cy; 									\
+  _Complex cy; 									\
   int nz=0;										\
   float fnu;									\
   int ierr;									\
@@ -26,10 +26,10 @@
 }
 
 #define FUNC_CBESSEL(j,J)						\
-  Complex cBessel_##J(float fnu, Complex z)		\
+  _Complex cBessel_##J(float fnu, _Complex z)		\
   {												\
 	int nn=1,kode=1;							\
-	Complex cy;									\
+	_Complex cy;									\
 	int nz=0;										\
 	int ierr;										\
 	cbes##j##_(&z, &fnu, &kode, &nn, &cy, &nz, &ierr);	\
@@ -37,10 +37,10 @@
   }
 
 #define FUNC_CBESSELH_N(i)							\
-  Complex cBessel_H##i##n(int n, Complex z)		\
+  _Complex cBessel_H##i##n(int n, _Complex z)		\
   {												\
 	int nn=1,kode=1,m;							\
-	Complex cy;									\
+	_Complex cy;									\
 	int nz=0;									\
 	float fnu;									\
 	int ierr;									\
@@ -51,74 +51,80 @@
   }
 
 #define FUNC_CBESSELH(i)						\
-  Complex cBessel_H##i(float fnu, Complex z)		\
+  _Complex cBessel_H##i(float fnu, _Complex z)		\
   {												\
 	int nn=1,kode=1,m=i;							\
-	Complex cy;										\
+	_Complex cy;										\
 	int nz=0;											\
 	int ierr;											\
 	cbesh_(&z, &fnu, &kode, &m,&nn, &cy, &nz, &ierr);	\
 	return(cy);											\
   }
 
-#define FUNC_ZBESSEL_N(j,J)								\
-  ZComplex zBessel_##J##n(int n, ZComplex z)			\
-  {														\
-	int nn=1,kode=1;									\
-	ZComplex cyr;										\
-	int nz=0;											\
-	double fnu;											\
-	int ierr;											\
-	my_ZComplex z0,cyr0;								\
+#define FUNC_ZBESSEL_N(j,J)											\
+  double _Complex zBessel_##J##n(int n, double _Complex z)			\
+  {																	\
+	int nn=1,kode=1;												\
+	double _Complex cyr;											\
+	int nz=0;														\
+	double fnu;															\
+	int ierr;															\
+	double z0re,z0im,cyr0re,cyr0im;										\
 	fnu=n;																\
-	z0=toMyZComplex(z);													\
-	zbes##j##_(&z0.re, &z0.im, &fnu, &kode, &nn, &cyr0.re, &cyr0.im, &nz, &ierr); \
-	cyr=fromMyZComplex(cyr0);											\
-	return(cyr);														\
+	z0re=creal(z);														\
+	z0im=cimag(z);														\
+	zbes##j##_(&z0re, &z0im, &fnu, &kode, &nn, &cyr0re, &cyr0im, &nz, &ierr); \
+	  cyr=cyr0re+I*cyr0im;												\
+	  return(cyr);														\
   }
 
 #define FUNC_ZBESSEL(j,J)								\
-  ZComplex zBessel_##J(double fnu, ZComplex z)			\
+  double _Complex zBessel_##J(double fnu, double _Complex z)			\
   {														\
 	int nn=1,kode=1;									\
-	ZComplex cyr;										\
-	my_ZComplex z0,cyr0;								\
+	double _Complex cyr;										\
+	double z0re,z0im,cyr0re,cyr0im;										\
     int ierr;											\
 	int nz=0;															\
-	z0=toMyZComplex(z);													\
-	zbes##j##_(&z0.re, &z0.im, &fnu, &kode, &nn, &cyr0.re, &cyr0.im, &nz, &ierr); \
-	cyr=fromMyZComplex(cyr0);											\
+	z0re=creal(z);														\
+	z0im=cimag(z);														\
+	zbes##j##_(&z0re, &z0im, &fnu, &kode, &nn, &cyr0re, &cyr0im, &nz, &ierr); \
+	  cyr=cyr0re+I*cyr0im;												\
 	return(cyr);														\
   }
 
 #define FUNC_ZBESSELH_N(i)									\
-  ZComplex zBessel_H##i##n(int n, ZComplex z)				\
+  double _Complex zBessel_H##i##n(int n, double _Complex z)				\
   {															\
 	int nn=1,kode=1,m=i;									\
-	ZComplex cy;											\
+	double _Complex cyr;											\
 	int nz=0;												\
     int ierr;												\
 	double fnu;														\
-	my_ZComplex z0,cy0;												\
+	double z0re,z0im,cyr0re,cyr0im;										\
 	fnu=n;															\
-	z0=toMyZComplex(z);													\
-	zbesh_(&z0.re, &z0.im, &fnu, &kode, &m, &nn, &cy0.re, &cy0.im, &nz, &ierr); \
-	cy=fromMyZComplex(cy0);												\
-	return(cy);															\
+	z0re=creal(z);														\
+	z0im=cimag(z);														\
+	zbesh_(&z0re, &z0im, &fnu, &kode, &m, &nn, &cyr0re, &cyr0im, &nz, &ierr); \
+	cyr=cyr0re+I*cyr0im;													\
+	return(cyr);														\
   }
 
 #define FUNC_ZBESSELH(i)									\
-  ZComplex zBessel_H##i(double fnu, ZComplex z)				\
+  double _Complex zBessel_H##i(double fnu, double _Complex z)				\
   {															\
 	int nn=1,kode=1,m=i;										\
-	ZComplex cy;												\
+	double _Complex cyr;												\
     int ierr;														\
-	int nz=0;														\
-	my_ZComplex z0,cy0;												\
-	z0=toMyZComplex(z);													\
-	zbesh_(&z0.re, &z0.im, &fnu, &kode, &m, &nn, &cy0.re, &cy0.im, &nz, &ierr); \
-	cy=fromMyZComplex(cy0);												\
-	return(cy);															\
+	int nz=0;															\
+	double z0re,z0im,cyr0re,cyr0im;											\
+	int n;																\
+	fnu=n;															\
+	z0re=creal(z);														\
+	z0im=cimag(z);														\
+	zbesh_(&z0re, &z0im, &fnu, &kode, &m, &nn, &cyr0re, &cyr0im, &nz, &ierr); \
+	cyr=cyr0re+I*cyr0im;													\
+	return(cyr);														\
   }
 
 FUNC_CBESSELH_N(1);
@@ -151,50 +157,50 @@ FUNC_ZBESSELH_N(2);
 FUNC_ZBESSELH(1);
 FUNC_ZBESSELH(2);
 
-Complex cAiry(Complex z)
+_Complex cAiry(_Complex z)
 {
   int id=0;
   int kode=1,nz=0;
   int ierr;
-  Complex ai;
+  _Complex ai;
   cairy_(&z, &id, &kode, &ai, &nz, &ierr);
   return(ai);
 }
 
-Complex cAirydz(Complex z)
+_Complex cAirydz(_Complex z)
 {
   int id=1;
   int kode=1,nz=0;
   int ierr;
-  Complex ai;
+  _Complex ai;
   cairy_(&z, &id, &kode, &ai, &nz, &ierr);
   return(ai);
 }
 
-Complex cBiry(Complex z)
+_Complex cBiry(_Complex z)
 {
   int id=0;
   int kode=1,nz=0;
   int ierr;
-  Complex ai;
+  _Complex ai;
   cbiry_(&z, &id, &kode, &ai, &ierr);
   return(ai);
 }
 
-Complex cbirydz(Complex z)
+_Complex cbirydz(_Complex z)
 {
   int id=1;
   int kode=1,nz=0;
   int ierr;
-  Complex ai;
+  _Complex ai;
   cbiry_(&z, &id, &kode, &ai, &ierr);
   return(ai);
 }
 
-Complex cBessel_Yn(int n, Complex z)
+_Complex cBessel_Yn(int n, _Complex z)
 {
   int nn=1,kode=1;
-  Complex cy,cwrk;
+  _Complex cy,cwrk;
   int nz=0;
   int ierr;
   float fnu;
@@ -203,95 +209,102 @@ Complex cBessel_Yn(int n, Complex z)
   return(cy);
 }
 
-Complex cBessel_Y(float fnu, Complex z)
+_Complex cBessel_Y(float fnu, _Complex z)
 {
   int nn=1,kode=1;
-  Complex cy,cwrk;
+  _Complex cy,cwrk;
   int ierr;
   int nz=0;
   cbesy_(&z, &fnu, &kode, &nn, &cy, &nz, &cwrk,&ierr);
   return(cy);
 }
 
-ZComplex zBessel_Yn(int n, ZComplex z)
+double _Complex zBessel_Yn(int n, double _Complex z)
 {
   int nn=1,kode=1;
-  ZComplex cyr;
-  my_ZComplex cwrk;
+  double _Complex cyr;
   int nz=0;
   int ierr;
   double fnu;
-  my_ZComplex z0,cyr0;
+  double z0re,z0im,cyr0re,cyr0im;
+  double cwrkre,cwrkim;
   fnu=n;
-  z0=toMyZComplex(z);\
-  zbesy_(&z0.re, &z0.im, &fnu, &kode, &nn, &cyr0.re, &cyr0.im, &nz, &cwrk.re, &cwrk.im, &ierr);
-  cyr=fromMyZComplex(cyr0);\
+  z0re=creal(z);
+  z0im=cimag(z);
+  zbesy_(&z0re, &z0im, &fnu, &kode, &nn, &cyr0re, &cyr0im, &nz, &cwrkre, &cwrkim, &ierr);
+  cyr=(cyr0re+I*cyr0im);
   return(cyr);
 }
 
-ZComplex zBessel_Y(double fnu, ZComplex z)
+double _Complex zBessel_Y(double fnu, double _Complex z)
 {
   int nn=1,kode=1;
-  ZComplex cyr;
-  my_ZComplex cwrk;
+  double _Complex cyr;
   int nz=0;
   int ierr;
-  my_ZComplex z0,cyr0;
-  z0=toMyZComplex(z);\
-  zbesy_(&z0.re, &z0.im, &fnu, &kode, &nn, &cyr0.re, &cyr0.im, &nz, &cwrk.re, &cwrk.im,&ierr);
-  cyr=fromMyZComplex(cyr0);\
+  double _Complex z0,cyr0;
+  double z0re,z0im,cyr0re,cyr0im;
+  double cwrkre,cwrkim;
+  z0re=creal(z);\
+  z0im=cimag(z);\
+  zbesy_(&z0re, &z0im, &fnu, &kode, &nn, &cyr0re, &cyr0im, &nz, &cwrkre, &cwrkim,&ierr);
+  cyr=(cyr0re+I*cyr0im);\
   return(cyr);
 }
 
-ZComplex zAiry(ZComplex z)
+double _Complex zAiry(double _Complex z)
 {
   int id=0;
   int kode=1,nz=0;
   int ierr;
-  ZComplex ai;
-  my_ZComplex z0,ai0;
-  z0=toMyZComplex(z);\
-  zairy_(&z0.re, &z0.im, &id, &kode, &ai0.re, &ai0.im, &nz, &ierr);
-  ai=fromMyZComplex(ai0);\
+  double _Complex ai;
+  double z0re,z0im,ai0re,ai0im;
+  z0re=creal(z);
+  z0im=cimag(z);
+  zairy_(&z0re, &z0im, &id, &kode, &ai0re, &ai0im, &nz, &ierr);
+  ai=ai0re+I*ai0im;
   return(ai);
 }
 
-ZComplex zAirydz(ZComplex z)
+double _Complex zAirydz(double _Complex z)
 {
   int id=1;
   int kode=1,nz=0;
   int ierr;
-  ZComplex ai;
-  my_ZComplex z0,ai0;
-  z0=toMyZComplex(z);\
-  zairy_(&z0.re, &z0.im, &id, &kode, &ai0.re, &ai0.im, &nz, &ierr);
-  ai=fromMyZComplex(ai0);\
+  double _Complex ai;
+  double z0re,z0im,ai0re,ai0im;
+  z0re=creal(z);
+  z0im=cimag(z);
+  zairy_(&z0re, &z0im, &id, &kode, &ai0re, &ai0im, &nz, &ierr);
+  ai=ai0re+I*ai0im;
   return(ai);
 }
 
-ZComplex zBiry(ZComplex z)
+double _Complex zBiry(double _Complex z)
 {
   int id=0;
   int kode=1;
   int ierr;
-  ZComplex ai;
-  my_ZComplex z0,ai0;
-  z0=toMyZComplex(z);\
-  zbiry_(&z0.re, &z0.im, &id, &kode, &ai0.re, &ai0.im, &ierr);
-  ai=fromMyZComplex(ai0);\
+  double _Complex ai;
+  double z0re,z0im,ai0re,ai0im;
+  z0re=creal(z);
+  z0im=cimag(z);
+  zbiry_(&z0re, &z0im, &id, &kode, &ai0re, &ai0im, &ierr);
+  ai=ai0re+I*ai0im;
   return(ai);
 }
 
-ZComplex zBirydz(ZComplex z)
+double _Complex zBirydz(double _Complex z)
 {
   int id=1;
   int kode=1;
   int ierr;
-  ZComplex ai;
-  my_ZComplex z0,ai0;
-  z0=toMyZComplex(z);\
-  zbiry_(&z0.re, &z0.im, &id, &kode, &ai0.re, &ai0.im, &ierr);
-  ai=fromMyZComplex(ai0);\
+  double _Complex ai;
+  double z0re,z0im,ai0re,ai0im;
+  z0re=creal(z);
+  z0im=cimag(z);
+  zbiry_(&z0re, &z0im, &id, &kode, &ai0re, &ai0im, &ierr);
+  ai=ai0re+I*ai0im;
   return(ai);
 }
 
@@ -312,17 +325,17 @@ Complex fromMyComplex(my_Complex z0)
 }
 */
 
-my_ZComplex toMyZComplex(ZComplex z)
-{
-  my_ZComplex z0;
-  z0.re=re_complex(z);
-  z0.im=im_complex(z);
-  return(z0);
-}
+/* double _Complex toMydouble _Complex(double _Complex z) */
+/* { */
+/*   my_double _Complex z0; */
+/*   z0.re=re_complex(z); */
+/*   z0.im=im_complex(z); */
+/*   return(z0); */
+/* } */
 
-ZComplex fromMyZComplex(my_ZComplex z0)
-{
-  ZComplex z;
-  z=cmplx(z0.re,z0.im);
-  return(z);
-}
+/* double _Complex fromMydouble _Complex(my_double _Complex z0) */
+/* { */
+/*   double _Complex z; */
+/*   z=cmplx(z0.re,z0.im); */
+/*   return(z); */
+/* } */

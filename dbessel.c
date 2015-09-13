@@ -59,7 +59,7 @@ double dBessel_In(int m, double z)
 }
 
 // Hankel Functions: argunemt : double, result: double Complex
-ZComplex dz0Bessel_H1n(int m, double z)
+double _Complex dz0Bessel_H1n(int m, double z)
 {
   if(m==0)
 	return( - z0Bessel_H1n(1,z)); 
@@ -67,7 +67,7 @@ ZComplex dz0Bessel_H1n(int m, double z)
 	return((z0Bessel_H1n(m-1,z)-z0Bessel_H1n(m+1,z))/2.);
 }
 
-ZComplex dz0Bessel_H2n(int m, double z)
+double _Complex dz0Bessel_H2n(int m, double z)
 {
   if(m==0)
 	return( - z0Bessel_H2n(1,z)); 
@@ -78,7 +78,7 @@ ZComplex dz0Bessel_H2n(int m, double z)
 // 
 // double complex
 // double
-ZComplex dzBessel_Jn(int m, ZComplex z)
+double _Complex dzBessel_Jn(int m, double _Complex z)
 {
   if(m==0)
 	return( - zBessel_Jn(1,z));
@@ -86,7 +86,7 @@ ZComplex dzBessel_Jn(int m, ZComplex z)
 	return((zBessel_Jn(m-1,z)-zBessel_Jn(m+1,z))/2.);
 }
 
-ZComplex dzBessel_Yn(int m, ZComplex z)
+double _Complex dzBessel_Yn(int m, double _Complex z)
 {
   if(m==0)
 	return( - zBessel_Yn(1,z)); 
@@ -94,7 +94,7 @@ ZComplex dzBessel_Yn(int m, ZComplex z)
 	return((zBessel_Yn(m-1,z)-zBessel_Yn(m+1,z))/2.);
 }
 
-ZComplex dzBessel_Kn(int m, ZComplex z)
+double _Complex dzBessel_Kn(int m, double _Complex z)
 {
   if(m==0)
 	return( - zBessel_Kn(1,z));
@@ -102,7 +102,7 @@ ZComplex dzBessel_Kn(int m, ZComplex z)
 	return((-zBessel_Kn(m-1,z)-zBessel_Kn(m+1,z))/2.);
 }
 
-ZComplex dzBessel_In(int m, ZComplex z)
+double _Complex dzBessel_In(int m, double _Complex z)
 {
   if(m==0)
 	return( zBessel_In(1,z));
@@ -110,7 +110,7 @@ ZComplex dzBessel_In(int m, ZComplex z)
 	return(( zBessel_In(m-1,z) + zBessel_In(m+1,z))/2.);
 }
 
-ZComplex dzBessel_H1n(int m, ZComplex z)
+double _Complex dzBessel_H1n(int m, double _Complex z)
 {
   if(m==0)
 	return( - zBessel_H1n(1,z)); 
@@ -118,12 +118,10 @@ ZComplex dzBessel_H1n(int m, ZComplex z)
 	return(( zBessel_H1n(m-1,z)-zBessel_H1n(m+1,z))/2.);
 }
 
-ZComplex dzBessel_H2n(int m, ZComplex z)
+double _Complex dzBessel_H2n(int m, double _Complex z)
 {
   if(m==0)
 	return( - zBessel_H2n(1,z)); 
   else
 	return(( zBessel_H2n(m-1,z)-zBessel_H2n(m+1,z))/2.);
 }
-
-
