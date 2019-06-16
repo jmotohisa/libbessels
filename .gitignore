@@ -22,3 +22,4 @@ stamp-h1
 
 python/build
 python/_libbessel*
+python/libbessel_wrap.c
