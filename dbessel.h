@@ -23,7 +23,7 @@
 /*   #define Complex float _Complex */
 /*  #endif */
 /*  #ifndef ZComplex */
-/*   #define ZComplex double _Complex */
+/*   #define ZComplex double complex */
 /*  #endif */
 /*  #ifndef re_complex */
 /*   #define re_complex(c) creal(c) */
@@ -73,16 +73,16 @@ GLOBAL double dBessel_Yn(int , double );
 GLOBAL double dBessel_In(int , double );
 GLOBAL double dBessel_Kn(int , double );
 
-GLOBAL double _Complex dz0Bessel_H1n(int , double );
-GLOBAL double _Complex dz0Bessel_H2n(int , double );
+GLOBAL double complex z0dBessel_H1n(int , double );
+GLOBAL double complex z0dBessel_H2n(int , double );
 
 //double complex
-GLOBAL double _Complex zdBessel_Jn(int , double _Complex );
-GLOBAL double _Complex zdBessel_Yn(int , double _Complex );
-GLOBAL double _Complex zdBessel_In(int , double _Complex );
-GLOBAL double _Complex zdBessel_Kn(int , double _Complex );
-GLOBAL double _Complex zdBessel_H1n(int , double _Complex );
-GLOBAL double _Complex zdBessel_H2n(int , double _Complex );
+GLOBAL double complex zdBessel_Jn(int , double complex );
+GLOBAL double complex zdBessel_Yn(int , double complex );
+GLOBAL double complex zdBessel_In(int , double complex );
+GLOBAL double complex zdBessel_Kn(int , double complex );
+GLOBAL double complex zdBessel_H1n(int , double complex );
+GLOBAL double complex zdBessel_H2n(int , double complex );
 
 #ifdef __cplusplus
 }

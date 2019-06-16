@@ -19,3 +19,6 @@ guile/Makefile
 guile/include_libbessels.scm
 libtool
 stamp-h1
+
+python/build
+python/_libbessel*

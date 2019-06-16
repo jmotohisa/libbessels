@@ -36,7 +36,7 @@
   {																		\
 	double _Complex zout;												\
 	zout= FUNC(scm_to_int(n),scm_to_double(x));							\
-	return scm_from_complex (creal(zout),cimag(zout));					\
+	return scm_c_make_rectangular (creal(zout),cimag(zout));					\
   }
 
 // for doube complex input, integer order, double complex output
@@ -47,7 +47,7 @@
 	double _Complex zin,zout;											\
 	zin=scm_c_real_part(x)+I*scm_c_imag_part(x);						\
 	zout= FUNC(scm_to_int(n),zin);										\
-	return scm_from_complex (creal(zout),cimag(zout));					\
+	return scm_c_make_rectangular (creal(zout),cimag(zout));				\
   }
 
 #define EXPORT_FUNC(func,i)										\
@@ -79,8 +79,8 @@ BESSEL_DND_WRAPPER(dBessel_Jn);
 BESSEL_DND_WRAPPER(dBessel_Yn);
 BESSEL_DND_WRAPPER(dBessel_In);
 BESSEL_DND_WRAPPER(dBessel_Kn);
-BESSEL_ZND_WRAPPER(dz0Bessel_H1n);
-BESSEL_ZND_WRAPPER(dz0Bessel_H2n);
+BESSEL_ZND_WRAPPER(z0dBessel_H1n);
+BESSEL_ZND_WRAPPER(z0dBessel_H2n);
 				   
 BESSEL_ZNZ_WRAPPER(zBessel_Jn);
 BESSEL_ZNZ_WRAPPER(zBessel_Yn);
@@ -89,12 +89,12 @@ BESSEL_ZNZ_WRAPPER(zBessel_Kn);
 BESSEL_ZNZ_WRAPPER(zBessel_H1n);
 BESSEL_ZNZ_WRAPPER(zBessel_H2n);
 
-BESSEL_ZNZ_WRAPPER(dzBessel_Jn);
-BESSEL_ZNZ_WRAPPER(dzBessel_Yn);
-BESSEL_ZNZ_WRAPPER(dzBessel_In);
-BESSEL_ZNZ_WRAPPER(dzBessel_Kn);
-BESSEL_ZNZ_WRAPPER(dzBessel_H1n);
-BESSEL_ZNZ_WRAPPER(dzBessel_H2n);
+BESSEL_ZNZ_WRAPPER(zdBessel_Jn);
+BESSEL_ZNZ_WRAPPER(zdBessel_Yn);
+BESSEL_ZNZ_WRAPPER(zdBessel_In);
+BESSEL_ZNZ_WRAPPER(zdBessel_Kn);
+BESSEL_ZNZ_WRAPPER(zdBessel_H1n);
+BESSEL_ZNZ_WRAPPER(zdBessel_H2n);
 
 void
 init_math_bessel ()
@@ -120,15 +120,15 @@ init_math_bessel ()
   EXPORT_FUNC(dBessel_Yn,2);
   EXPORT_FUNC(dBessel_In,2);
   EXPORT_FUNC(dBessel_Kn,2);
-  EXPORT_FUNC(dz0Bessel_H1n,2);
-  EXPORT_FUNC(dz0Bessel_H2n,2);
+  EXPORT_FUNC(z0dBessel_H1n,2);
+  EXPORT_FUNC(z0dBessel_H2n,2);
 
-  EXPORT_FUNC(dzBessel_Jn,2);
-  EXPORT_FUNC(dzBessel_Yn,2);
-  EXPORT_FUNC(dzBessel_In,2);
-  EXPORT_FUNC(dzBessel_Kn,2);
-  EXPORT_FUNC(dzBessel_H1n,2);
-  EXPORT_FUNC(dzBessel_H2n,2);
+  EXPORT_FUNC(zdBessel_Jn,2);
+  EXPORT_FUNC(zdBessel_Yn,2);
+  EXPORT_FUNC(zdBessel_In,2);
+  EXPORT_FUNC(zdBessel_Kn,2);
+  EXPORT_FUNC(zdBessel_H1n,2);
+  EXPORT_FUNC(zdBessel_H2n,2);
 }
 
 void

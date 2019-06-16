@@ -64,8 +64,8 @@
 extern "C" {
 #endif
 
-GLOBAL double _Complex z0Bessel_H1n(int , double );
-GLOBAL double _Complex z0Bessel_H2n(int , double );
+GLOBAL double complex z0Bessel_H1n(int , double );
+GLOBAL double complex z0Bessel_H2n(int , double );
   //  GLOBAL ZComplex zBessel_H1n(int , ZComplex );
   //  GLOBAL ZComplex zBessel_H2n(int , ZComplex );
 

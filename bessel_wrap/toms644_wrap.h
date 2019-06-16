@@ -3,11 +3,14 @@
 #ifndef _toms644_wrap_H
 #define _toms644_wrap_H
 
+#include <complex.h>
+
 #ifdef	GLOBAL_VALUE_DEFINE
 #define	GLOBAL
 #else
 #define	GLOBAL extern
 #endif
+
 
 /* #ifndef _my_Complex_DEFINED */
 /* #define _my_Complex_DEFINED */
@@ -23,7 +26,7 @@
 /*   #define Complex float _Complex */
 /*  #endif */
 /*  #ifndef ZComplex */
-/*   #define ZComplex double _Complex */
+/*   #define ZComplex double complex */
 /*  #endif */
 /*  #ifndef re_complex */
 /*   #define re_complex(c) creal(c) */
@@ -69,13 +72,13 @@ extern "C" {
 #endif
 
 // TOMS 644 libraries (f77)
-extern void cairy_(_Complex *, int *, int *, _Complex *, int *, int *);
-extern void cbesh_(_Complex *, float *, int *, int *, int *, _Complex *, int *, int *);
-extern void cbesi_(_Complex *, float *, int *, int *, _Complex *, int *, int *);
-extern void cbesj_(_Complex *, float *, int *, int *, _Complex *, int *, int *);
-extern void cbesk_(_Complex *, float *, int *, int *, _Complex *, int *, int *);
-extern void cbesy_(_Complex *, float *, int *, int *, _Complex *, int *, _Complex *, int *);
-extern void cbiry_(_Complex *, int *, int *, _Complex *, int *);
+extern void cairy_(float complex *, int *, int *, float complex *, int *, int *);
+extern void cbesh_(float complex *, float *, int *, int *, int *, float complex *, int *, int *);
+extern void cbesi_(float complex *, float *, int *, int *, float complex *, int *, int *);
+extern void cbesj_(float complex *, float *, int *, int *, float complex *, int *, int *);
+extern void cbesk_(float complex *, float *, int *, int *, float complex *, int *, int *);
+extern void cbesy_(float complex *, float *, int *, int *, float complex *, int *, float complex *, int *);
+extern void cbiry_(float complex *, int *, int *, float complex *, int *);
 
 extern void zairy_(double *, double *, int *, int *, double *, double *, int *, int *);
 extern void zbesh_(double *, double *, double *, int *, int *, int *, double *, double *, int *, int *);
@@ -86,47 +89,47 @@ extern void zbesy_(double *, double *, double *, int *, int *, double *, double 
 extern void zbiry_(double *, double *, int *, int *, double *, double *, int *);
 
 // Complex version
-GLOBAL _Complex cBessel_H1n(int , _Complex );
-GLOBAL _Complex cBessel_H2n(int , _Complex );
-GLOBAL _Complex cBessel_In(int , _Complex );
-GLOBAL _Complex cBessel_Jn(int , _Complex );
-GLOBAL _Complex cBessel_Kn(int , _Complex );
-GLOBAL _Complex cBessel_Yn(int , _Complex );
+GLOBAL float complex cBessel_H1n(int , float complex );
+GLOBAL float complex cBessel_H2n(int , float complex );
+GLOBAL float complex cBessel_In(int , float complex );
+GLOBAL float complex cBessel_Jn(int , float complex );
+GLOBAL float complex cBessel_Kn(int , float complex );
+GLOBAL float complex cBessel_Yn(int , float complex );
 
-GLOBAL _Complex cBessel_H1(float , _Complex );
-GLOBAL _Complex cBessel_H2(float , _Complex );
-GLOBAL _Complex cBessel_I(float , _Complex );
-GLOBAL _Complex cBessel_J(float , _Complex );
-GLOBAL _Complex cBessel_K(float , _Complex );
-GLOBAL _Complex cBessel_Y(float , _Complex );
+GLOBAL float complex cBessel_H1(float , float complex );
+GLOBAL float complex cBessel_H2(float , float complex );
+GLOBAL float complex cBessel_I(float , float complex );
+GLOBAL float complex cBessel_J(float , float complex );
+GLOBAL float complex cBessel_K(float , float complex );
+GLOBAL float complex cBessel_Y(float , float complex );
 
-GLOBAL _Complex cAiry(_Complex );
-GLOBAL _Complex cAirydz(_Complex );
-GLOBAL _Complex cBiry(_Complex );
-GLOBAL _Complex cBirydz(_Complex );
+GLOBAL float complex cAiry(float complex );
+GLOBAL float complex cAirydz(float complex );
+GLOBAL float complex cBiry(float complex );
+GLOBAL float complex cBirydz(float complex );
 
 // double complex
-GLOBAL double _Complex zBessel_H1n(int , double _Complex );
-GLOBAL double _Complex zBessel_H2n(int , double _Complex );
-GLOBAL double _Complex zBessel_Jn(int , double _Complex );
-GLOBAL double _Complex zBessel_Yn(int , double _Complex );
-GLOBAL double _Complex zBessel_In(int , double _Complex );
-GLOBAL double _Complex zBessel_Kn(int , double _Complex );
+GLOBAL double complex zBessel_H1n(int , double complex );
+GLOBAL double complex zBessel_H2n(int , double complex );
+GLOBAL double complex zBessel_Jn(int , double complex );
+GLOBAL double complex zBessel_Yn(int , double complex );
+GLOBAL double complex zBessel_In(int , double complex );
+GLOBAL double complex zBessel_Kn(int , double complex );
   
-GLOBAL double _Complex zBessel_H1(double , double _Complex );
-GLOBAL double _Complex zBessel_H2(double , double _Complex );
-GLOBAL double _Complex zBessel_I(double , double _Complex );
-GLOBAL double _Complex zbessel_J(double , double _Complex );
-GLOBAL double _Complex zBessel_K(double , double _Complex );
-GLOBAL double _Complex zBessel_Y(double , double _Complex );
+GLOBAL double complex zBessel_H1(double , double complex );
+GLOBAL double complex zBessel_H2(double , double complex );
+GLOBAL double complex zBessel_I(double , double complex );
+GLOBAL double complex zbessel_J(double , double complex );
+GLOBAL double complex zBessel_K(double , double complex );
+GLOBAL double complex zBessel_Y(double , double complex );
 
-GLOBAL double _Complex zAiry(double _Complex );
-GLOBAL double _Complex zAirydz(double _Complex );
-GLOBAL double _Complex zBiry(double _Complex );
-GLOBAL double _Complex zBirydz(double _Complex );
+GLOBAL double complex zAiry(double complex );
+GLOBAL double complex zAirydz(double complex );
+GLOBAL double complex zBiry(double complex );
+GLOBAL double complex zBirydz(double complex );
 
-/* GLOBAL my_double _Complex toMydouble _Complex(double _Complex ); */
-/* GLOBAL double _Complex fromMydouble _Complex(my_double _Complex ); */
+/* GLOBAL my_double complex toMydouble complex(double complex ); */
+/* GLOBAL double complex fromMydouble complex(my_double complex ); */
 
 #ifdef __cplusplus
 }

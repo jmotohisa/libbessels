@@ -19,6 +19,7 @@ c derivative of bessel function
 #include <complex.h>
 #include <gsl/gsl_sf_bessel.h>
 #include "bessel_wrap/gsl_bessel_wrap.h"
+#include "bessel_wrap/hankel_gsl_wrap.h"
 #include "bessel_wrap/toms644_wrap.h"
 /* #include <gsl/gsl_math.h> */
 /* #include <gsl/gsl_const_mksa.h> */
@@ -59,7 +60,7 @@ double dBessel_In(int m, double z)
 }
 
 // Hankel Functions: argunemt : double, result: double Complex
-double _Complex dz0Bessel_H1n(int m, double z)
+double complex z0dBessel_H1n(int m, double z)
 {
   if(m==0)
 	return( - z0Bessel_H1n(1,z)); 
@@ -67,7 +68,7 @@ double _Complex dz0Bessel_H1n(int m, double z)
 	return((z0Bessel_H1n(m-1,z)-z0Bessel_H1n(m+1,z))/2.);
 }
 
-double _Complex dz0Bessel_H2n(int m, double z)
+double complex z0dBessel_H2n(int m, double z)
 {
   if(m==0)
 	return( - z0Bessel_H2n(1,z)); 
@@ -78,7 +79,7 @@ double _Complex dz0Bessel_H2n(int m, double z)
 // 
 // double complex
 // double
-double _Complex dzBessel_Jn(int m, double _Complex z)
+double complex zdBessel_Jn(int m, double complex z)
 {
   if(m==0)
 	return( - zBessel_Jn(1,z));
@@ -86,7 +87,7 @@ double _Complex dzBessel_Jn(int m, double _Complex z)
 	return((zBessel_Jn(m-1,z)-zBessel_Jn(m+1,z))/2.);
 }
 
-double _Complex dzBessel_Yn(int m, double _Complex z)
+double complex zdBessel_Yn(int m, double complex z)
 {
   if(m==0)
 	return( - zBessel_Yn(1,z)); 
@@ -94,7 +95,7 @@ double _Complex dzBessel_Yn(int m, double _Complex z)
 	return((zBessel_Yn(m-1,z)-zBessel_Yn(m+1,z))/2.);
 }
 
-double _Complex dzBessel_Kn(int m, double _Complex z)
+double complex zdBessel_Kn(int m, double complex z)
 {
   if(m==0)
 	return( - zBessel_Kn(1,z));
@@ -102,7 +103,7 @@ double _Complex dzBessel_Kn(int m, double _Complex z)
 	return((-zBessel_Kn(m-1,z)-zBessel_Kn(m+1,z))/2.);
 }
 
-double _Complex dzBessel_In(int m, double _Complex z)
+double complex zbBessel_In(int m, double complex z)
 {
   if(m==0)
 	return( zBessel_In(1,z));
@@ -110,7 +111,7 @@ double _Complex dzBessel_In(int m, double _Complex z)
 	return(( zBessel_In(m-1,z) + zBessel_In(m+1,z))/2.);
 }
 
-double _Complex dzBessel_H1n(int m, double _Complex z)
+double complex zbBessel_H1n(int m, double complex z)
 {
   if(m==0)
 	return( - zBessel_H1n(1,z)); 
@@ -118,7 +119,7 @@ double _Complex dzBessel_H1n(int m, double _Complex z)
 	return(( zBessel_H1n(m-1,z)-zBessel_H1n(m+1,z))/2.);
 }
 
-double _Complex dzBessel_H2n(int m, double _Complex z)
+double complex zdBessel_H2n(int m, double complex z)
 {
   if(m==0)
 	return( - zBessel_H2n(1,z)); 
