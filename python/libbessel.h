@@ -1,5 +1,5 @@
 /*
- *  libbessel.h - last saved: Time-stamp: <Sat Jun 01 13:29:28 JST 2019>
+ *  libbessel.h - last saved: Time-stamp: <Mon Jun 17 16:34:43 JST 2019>
  *
  *   Copyright (c) 2019  jmotohisa (Junichi Motohisa)  <motohisa@ist.hokudai.ac.jp>
  *
@@ -57,8 +57,8 @@ double _Complex zBessel_Yn(int , double _Complex );
 double _Complex zBessel_In(int , double _Complex );
 double _Complex zBessel_Kn(int , double _Complex );
 
-double _Complex dz0Bessel_H1n(int , double );
-double _Complex dz0Bessel_H2n(int , double );
+double _Complex z0dBessel_H1n(int , double );
+double _Complex z0dBessel_H2n(int , double );
 
 double _Complex zdBessel_Jn(int , double _Complex );
 double _Complex zdBessel_Yn(int , double _Complex );

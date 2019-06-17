@@ -33,7 +33,10 @@ guile/include_libbessels.scm
 libtool
 stamp-h1
 autom4te.cache/
+*/.dirstamp
+*/*/.dirstamp
 
 python/build
 python/_libbessel*
 python/libbessel_wrap.c
+python/libbessel.py

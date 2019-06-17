@@ -9,6 +9,12 @@ AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE
 
+SHARED_VERSION_INFO="1:0:0" # CURRENT:REVISION:AGE
+AC_SUBST(SHARED_VERSION_INFO)
+# need shared libraries for python interfaces
+AC_ENABLE_SHARED
+
+
 # Checks for programs.
 AC_PROG_CC
 AM_PROG_CC_C_O

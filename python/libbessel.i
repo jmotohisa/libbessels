@@ -1,21 +1,16 @@
-%module libbsessel
+%module libbessel
 
 %{
 #define SWIG_FILE_WITH_INIT
-#include <complex.h>
-#include "../dbessel.h"
-#include "../bessel_wrap/gsl_bessel_wrap.h"
-#include "../bessel_wrap/hankel_gsl_wrap.h"
-#include "../bessel_wrap/toms644_wrap.h"
+#include "libbessel.h"
+/* #include <complex.h> */
+/* #include "../dbessel.h" */
+/* #include "../bessel_wrap/gsl_bessel_wrap.h" */
+/* #include "../bessel_wrap/hankel_gsl_wrap.h" */
+/* #include "../bessel_wrap/toms644_wrap.h" */
 %}
 %include "complex.i"
 %include "numpy.i"
-
-/* %inline %{ */
-/*   double complex test(double complex X) { */
-/*     return X; */
-/*   } */
-/* %} */
 
 extern double Bessel_Jn(int, double );
 extern double Bessel_Yn(int, double );
