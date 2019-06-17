@@ -1,4 +1,4 @@
-SUBDIRS = bessel_wrap guile check
+SUBDIRS = bessel_wrap . guile check
 AUTOMAKE_OPTIONS = subdir-objects foreign
 
 lib_LTLIBRARIES = libbessels.la

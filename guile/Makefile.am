@@ -1,6 +1,9 @@
 lib_LTLIBRARIES = libbessels_guileext.la
 
 libbessels_guileext_la_SOURCES = guileextensions.c
+
+libbessels_guileext_la_LIBADD=../libbessels.la
+
 #../dbessels.c
 #          ../bessel_wrap/toms644_wrap.c ../bessel_wrap/hankel_gsl_wrap.c \
 #          ../bessel_wrap/toms644/cbsubs.f ../bessel_wrap/toms644/zbsubs.f \

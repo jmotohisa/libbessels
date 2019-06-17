@@ -34,7 +34,7 @@
   SCM																	\
   FUNC##_guile_wrapper (SCM n, SCM x)									\
   {																		\
-	double _Complex zout;												\
+	double complex zout;												\
 	zout= FUNC(scm_to_int(n),scm_to_double(x));							\
 	return scm_c_make_rectangular (creal(zout),cimag(zout));					\
   }
@@ -44,7 +44,7 @@
   SCM											\
   FUNC##_guile_wrapper (SCM n, SCM x)									\
   {																		\
-	double _Complex zin,zout;											\
+	double complex zin,zout;											\
 	zin=scm_c_real_part(x)+I*scm_c_imag_part(x);						\
 	zout= FUNC(scm_to_int(n),zin);										\
 	return scm_c_make_rectangular (creal(zout),cimag(zout));				\
@@ -52,8 +52,9 @@
 
 #define EXPORT_FUNC(func,i)										\
   snprintf(funcname,sizeof(funcname),"%s",#func);				\
-  scm_c_define_gsubr (funcname, i, 0, 0, func##_guile_wrapper); \
-  scm_c_export(funcname, NULL);
+  scm_c_define_gsubr (funcname, i, 0, 0, func##_guile_wrapper);
+
+//  scm_c_export(funcname, NULL);
 
 /* SCM */
 /* BesselJn_guile_wrapper (SCM n, SCM x) */
@@ -97,7 +98,7 @@ BESSEL_ZNZ_WRAPPER(zdBessel_H1n);
 BESSEL_ZNZ_WRAPPER(zdBessel_H2n);
 
 void
-init_math_bessel ()
+init_bessel ()
 {
   char funcname[MAXLEN];
   /* scm_c_define_gsubr ("BesselJn", 2, 0, 0, BesselJn_guile_wrapper); */
@@ -131,9 +132,9 @@ init_math_bessel ()
   EXPORT_FUNC(zdBessel_H2n,2);
 }
 
-void
-scm_init_math_bessel_module ()
-{
-  scm_c_define_module ("math bessel", init_math_bessel, NULL);
-}
+/* void */
+/* scm_init_math_bessel_module () */
+/* { */
+/*   scm_c_define_module ("math bessel", init_math_bessel, NULL); */
+/* } */
 
