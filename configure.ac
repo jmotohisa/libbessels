@@ -43,7 +43,7 @@ AC_CHECK_LIB(gsl, gsl_sf_bessel_Jn, [],
 ##############################################################################
 
 # subsequent libraries are only for libctl front end
-plplotsubs_save_LIBS=$LIBS
+libbessels_save_LIBS=$LIBS
 
 AC_ARG_WITH(libctl, [AC_HELP_STRING([--with-libctl=<dir>],[specify libctl directory])], with_libctl=$withval, with_libctl=yes)
 if test "x$with_libctl" = "xno"; then

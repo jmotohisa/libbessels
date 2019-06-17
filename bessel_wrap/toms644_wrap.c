@@ -8,7 +8,7 @@
 
 #include <complex.h>
 #include <math.h>
-#include <libguile.h>
+/* #include <libguile.h> */
 
 #define GLOBAL_VALUE_DEFINE
 #include "toms644_wrap.h"
@@ -111,20 +111,18 @@
 	return(cyr);														\
   }
 
-#define FUNC_ZBESSELH(i)									\
+#define FUNC_ZBESSELH(i)												\
   double complex zBessel_H##i(double fnu, double complex z)				\
-  {															\
-	int nn=1,kode=1,m=i;										\
-	double complex cyr;												\
-    int ierr;														\
+  {																		\
+	int nn=1,kode=1,m=i;												\
+	double complex cyr;													\
+    int ierr;															\
 	int nz=0;															\
-	double z0re,z0im,cyr0re,cyr0im;											\
-	int n;																\
-	fnu=n;															\
+	double z0re,z0im,cyr0re,cyr0im;										\
 	z0re=creal(z);														\
 	z0im=cimag(z);														\
 	zbesh_(&z0re, &z0im, &fnu, &kode, &m, &nn, &cyr0re, &cyr0im, &nz, &ierr); \
-	cyr=cyr0re+I*cyr0im;													\
+	cyr=cyr0re+I*cyr0im;												\
 	return(cyr);														\
   }
 
