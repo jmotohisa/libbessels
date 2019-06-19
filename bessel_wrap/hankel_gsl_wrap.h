@@ -1,5 +1,9 @@
 // hankel_gsl_warp.h
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef _HANKEL_GLS_WRAP_H
 #define _HANKEL_GLS_WRAP_H
 

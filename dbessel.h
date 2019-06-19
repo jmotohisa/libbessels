@@ -1,5 +1,9 @@
 // dbessel.h
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef _DBESSEL_H
 #define _DBESSEL_H
 
@@ -84,11 +88,12 @@ GLOBAL double complex zdBessel_Kn(int , double complex );
 GLOBAL double complex zdBessel_H1n(int , double complex );
 GLOBAL double complex zdBessel_H2n(int , double complex );
 
-#ifdef __cplusplus
-}
-#endif
-
 #undef GLOBAL_VALUE_DEFINE
 #undef GLOBAL
 
 #endif
+  
+#ifdef __cplusplus
+}
+#endif
+

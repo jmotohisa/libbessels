@@ -10,7 +10,8 @@ from numpy.distutils.core import setup, Extension
 
 ext_libbessel = Extension(
     '_libbessel',
-    sources=['../dbessel.c',
+    sources=['gsl_wrapper.c',
+             '../dbessel.c',
              '../bessel_wrap/toms644_wrap.c',
              '../bessel_wrap/hankel_gsl_wrap.c',
              '../bessel_wrap/toms644/cbsubs.f',
@@ -19,6 +20,7 @@ ext_libbessel = Extension(
              '../bessel_wrap/toms644/i1mach.f',
              '../bessel_wrap/toms644/r1mach.f',
              '../bessel_wrap/toms644/d1mach.f'],
+    libraries=['gsl', 'gslcblas'],
 )
 
 if __name__ == '__main__':

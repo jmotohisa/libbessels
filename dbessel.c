@@ -24,7 +24,13 @@ c derivative of bessel function
 /* #include <gsl/gsl_math.h> */
 /* #include <gsl/gsl_const_mksa.h> */
 /* #include <gsl/gsl_sf_bessel.h> */
+
 #include "dbessel.h"
+
+/* #define Bessel_Jn(n,x) gsl_sf_bessel_Jn(n,x) */
+/* #define Bessel_Yn(n,x) gsl_sf_bessel_Yn(n,x) */
+/* #define Bessel_In(n,x) gsl_sf_bessel_In(n,x) */
+/* #define Bessel_Kn(n,x) gsl_sf_bessel_Kn(n,x) */
 
 // double
 double dBessel_Jn(int m, double z)
@@ -103,7 +109,7 @@ double complex zdBessel_Kn(int m, double complex z)
 	return((-zBessel_Kn(m-1,z)-zBessel_Kn(m+1,z))/2.);
 }
 
-double complex zbBessel_In(int m, double complex z)
+double complex zdBessel_In(int m, double complex z)
 {
   if(m==0)
 	return( zBessel_In(1,z));
@@ -111,7 +117,7 @@ double complex zbBessel_In(int m, double complex z)
 	return(( zBessel_In(m-1,z) + zBessel_In(m+1,z))/2.);
 }
 
-double complex zbBessel_H1n(int m, double complex z)
+double complex zdBessel_H1n(int m, double complex z)
 {
   if(m==0)
 	return( - zBessel_H1n(1,z)); 

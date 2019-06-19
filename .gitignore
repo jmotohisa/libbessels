@@ -40,3 +40,4 @@ python/build
 python/_libbessel*
 python/libbessel_wrap.c
 python/libbessel.py
+python/__pycache__

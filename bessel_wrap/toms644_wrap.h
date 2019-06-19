@@ -1,5 +1,9 @@
 // toms644_wrap.h
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef _toms644_wrap_H
 #define _toms644_wrap_H
 
@@ -67,10 +71,6 @@
 /*  #endif */
 /* #endif */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 // TOMS 644 libraries (f77)
 extern void cairy_(float complex *, int *, int *, float complex *, int *, int *);
 extern void cbesh_(float complex *, float *, int *, int *, int *, float complex *, int *, int *);
@@ -131,11 +131,12 @@ GLOBAL double complex zBirydz(double complex );
 /* GLOBAL my_double complex toMydouble complex(double complex ); */
 /* GLOBAL double complex fromMydouble complex(my_double complex ); */
 
-#ifdef __cplusplus
-}
-#endif
-
 #undef GLOBAL_VALUE_DEFINE
 #undef GLOBAL
 
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+

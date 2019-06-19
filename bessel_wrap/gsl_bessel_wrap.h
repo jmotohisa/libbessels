@@ -1,5 +1,9 @@
 // gsl_bessel_wrap.h
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef _GSL_BESSEL_WRAP_H
 #define _GSL_BESSEL_WRAP_H
 
@@ -10,4 +14,8 @@
 #define Bessel_Kn(n,x) gsl_sf_bessel_Kn(n,x)
 #endif
 
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif

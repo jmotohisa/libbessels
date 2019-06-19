@@ -2,8 +2,9 @@
 
 %{
 #define SWIG_FILE_WITH_INIT
+#include <complex.h>
+#include <gsl/gsl_sf_bessel.h>
 #include "libbessel.h"
-/* #include <complex.h> */
 /* #include "../dbessel.h" */
 /* #include "../bessel_wrap/gsl_bessel_wrap.h" */
 /* #include "../bessel_wrap/hankel_gsl_wrap.h" */
