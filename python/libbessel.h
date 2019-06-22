@@ -1,5 +1,5 @@
 /*
- *  libbessel.h - last saved: Time-stamp: <Tue Jun 18 17:46:30 JST 2019>
+ *  libbessel.h - last saved: Time-stamp: <Sat Jun 22 20:39:22 JST 2019>
  *
  *   Copyright (c) 2019  jmotohisa (Junichi Motohisa)  <motohisa@ist.hokudai.ac.jp>
  *
@@ -75,5 +75,5 @@ double complex zdBessel_H2n(int , double complex );
 #endif  // _LIBBESSEL_H
 
 #ifdef __cplusplus
-extern "C" {
+}
 #endif

@@ -73,11 +73,12 @@ GLOBAL double complex z0Bessel_H2n(int , double );
   //  GLOBAL ZComplex zBessel_H1n(int , ZComplex );
   //  GLOBAL ZComplex zBessel_H2n(int , ZComplex );
 
-#ifdef __cplusplus
-}
-#endif
-
 #undef GLOBAL_VALUE_DEFINE
 #undef GLOBAL
 
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
