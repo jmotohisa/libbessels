@@ -64,10 +64,6 @@ extern "C" {
 /* #endif */
 /* #endif */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 GLOBAL double complex z0Bessel_H1n(int , double );
 GLOBAL double complex z0Bessel_H2n(int , double );
   //  GLOBAL ZComplex zBessel_H1n(int , ZComplex );

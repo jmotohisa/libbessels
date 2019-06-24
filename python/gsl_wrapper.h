@@ -1,5 +1,5 @@
 /*
- *  gsl_wrapper.c - Time-stamp: <Sat Jun 22 21:47:05 JST 2019>
+ *  gsl_wrapper.h - last saved: Time-stamp: <Mon Jun 24 21:06:51 JST 2019>
  *
  *   Copyright (c) 2019  jmotohisa (Junichi Motohisa)  <motohisa@ist.hokudai.ac.jp>
  *
@@ -26,48 +26,38 @@
  *   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  *   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- *  $Id: gsl_wrapper.c 2019-06-18 17:39:01 jmotohisa $
+ *  $Id: gsl_wrapper.h 2019-06-22 21:46:15 jmotohisa $
  */
 
 /*! 
-  @file gsl_wrapper.c 
+  @file gsl_wrapper.h 
   @brief 
   @author J. Motohisa
-  @date
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <complex.h>
-#include <tgmath.h>
-#include <gsl/gsl_sf_bessel.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#define GLOBAL_VALUE_DEFINE
-#include "gsl_wrapper.h"
+#ifndef _GSL_WRAPPER_H
+#define _GSL_WRAPPER_H
 
-/*!
-  @brief
-  @param[in]
-  @param[out]
-  @param[in,out]
-  @return
-*/
-double Bessel_Jn(int n,double x)
-{
-  return(gsl_sf_bessel_Jn(n,x));
+#ifdef	GLOBAL_VALUE_DEFINE
+#define	GLOBAL
+#else
+#define	GLOBAL extern
+#endif
+
+GLOBAL double Bessel_Jn(int n,double x);
+GLOBAL double Bessel_Yn(int n,double x);
+GLOBAL double Bessel_In(int n,double x);
+GLOBAL double Bessel_Kn(int n,double x);
+
+#undef GLOBAL_VALUE_DEFINE
+#undef GLOBAL
+#endif  // _GSL_WRAPPER_H
+
+#ifdef __cplusplus
 }
-
-double Bessel_Yn(int n,double x)
-{
-  return(gsl_sf_bessel_Yn(n,x));
-}
-
-double Bessel_In(int n,double x)
-{
-  return(gsl_sf_bessel_In(n,x));
-}
-
-double Bessel_Kn(int n,double x)
-{
-  return(gsl_sf_bessel_Kn(n,x));
-}
+#endif
+  

@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from numpy.distutils.core import setup, Extension
-from numpy.distutils.misc_util import Configuration
+# from numpy.distutils.misc_util import Configuration
 
 libbessel_sources = [
     'gsl_wrapper.c',
+    # 'libbessel.i',
     '../dbessel.c',
     '../bessel_wrap/toms644_wrap.c',
     '../bessel_wrap/hankel_gsl_wrap.c',
@@ -20,9 +21,8 @@ ext_libbessel = Extension(
     '_libbessel',
     sources=libbessel_sources,
     libraries=['gsl', 'gslcblas'],
+    library_dirs=['/opt/local/lib'],
 )
-
-# config = Configuration()
 
 if __name__ == '__main__':
     setup(
@@ -37,6 +37,13 @@ if __name__ == '__main__':
 # config.add_library("libbessel", sources=libbessel_sources)
 # config.add_extension("libbessel_f2py",
 #                      sources=["libbessel.pyf"],
+#                      libraries=["libbessel"], depends=libbessel_sources)
+
+# config = Configuration()
+
+# config.add_library("libbessel", sources=libbessel_sources)
+# config.add_extension("libbessel_f2py",
+#                      sources=[libbessel_f2py.pyf],
 #                      libraries=["libbessel"], depends=libbessel_sources)
 
 # setup(**config.todict())

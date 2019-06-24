@@ -13,28 +13,28 @@
 #define GLOBAL_VALUE_DEFINE
 #include "toms644_wrap.h"
 
-#define FUNC_CBESSEL_N(j,J)					\
+#define FUNC_CBESSEL_N(j,J)								\
   float complex cBessel_##J##n(int n, float complex z)	\
-  {												\
-  int nn,kode=1;								\
-  float complex cy; 									\
-  int nz=0;										\
-  float fnu;									\
-  int ierr;									\
-  fnu=n;										\
-  cbes##j##_(&z, &fnu, &kode, &nn, &cy, &nz, &ierr);	\
-  return(cy);										\
-}
-
-#define FUNC_CBESSEL(j,J)						\
-  float complex cBessel_##J(float fnu, float complex z)		\
-  {												\
-	int nn=1,kode=1;							\
-	float complex cy;									\
-	int nz=0;										\
-	int ierr;										\
+  {														\
+	int nn,kode=1;										\
+	float complex cy; 									\
+	int nz=0;											\
+	float fnu;											\
+	int ierr;											\
+	fnu=n;												\
 	cbes##j##_(&z, &fnu, &kode, &nn, &cy, &nz, &ierr);	\
 	return(cy);											\
+  }
+
+#define FUNC_CBESSEL(j,J)										\
+  float complex cBessel_##J(float fnu, float complex z)		\
+  {																\
+	int nn=1,kode=1;											\
+	float complex cy;											\
+	int nz=0;													\
+	int ierr;													\
+	cbes##j##_(&z, &fnu, &kode, &nn, &cy, &nz, &ierr);			\
+	return(cy);													\
   }
 
 #define FUNC_CBESSELH_N(i)							\
