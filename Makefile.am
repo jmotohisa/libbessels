@@ -1,3 +1,5 @@
+ACLOCAL_AMFLAGS = -I m4
+
 SUBDIRS = bessel_wrap . guile check
 AUTOMAKE_OPTIONS = subdir-objects foreign
 

@@ -1,6 +1,7 @@
 *.o
 *.la
 *.lo
+*~
 
 INSTALL
 m4
@@ -23,6 +24,7 @@ bessel_wrap/Makefile
 bessel_wrap/toms644/.libs/
 bessel_wrap/toms644/Makefile
 check/Makefile
+config.h.in
 config.h
 config.log
 config.status

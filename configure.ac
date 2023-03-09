@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.63])
+AC_PREREQ([2.69])
 AC_INIT([libbessels],[0.1a],[motohisa@ist.hokudai.ac.jp])
 AC_CONFIG_SRCDIR([bessel_wrap/toms644/zbsubs.f])
 AC_CONFIG_HEADERS([config.h])
@@ -23,7 +23,7 @@ AC_PROG_F77
 # AC_F77_LIBRARY_LDFLAGS
 
 AC_PROG_INSTALL
-AC_PROG_RANLIB
+# AC_PROG_RANLIB
 
 # Checks for libraries.
 LT_INIT
@@ -48,10 +48,9 @@ AC_CHECK_LIB(gsl, gsl_sf_bessel_Jn, [],
 	
 ##############################################################################
 
-# subsequent libraries are only for libctl front end
-libbessels_save_LIBS=$LIBS
+##############################################################################
 
-AC_ARG_WITH(libctl, [AC_HELP_STRING([--with-libctl=<dir>],[specify libctl directory])], with_libctl=$withval, with_libctl=yes)
+AC_ARG_WITH(libctl, [AS_HELP_STRING([--with-libctl=<dir>],[specify libctl directory])], with_libctl=$withval, with_libctl=yes)
 if test "x$with_libctl" = "xno"; then
         :
 elif test "x$with_libctl" != "xyes"; then
@@ -60,27 +59,38 @@ fi
 
 AM_CONDITIONAL(WITH_LIBCTL, test "x$with_libctl" != xno)
 
+AC_ARG_WITH(scheme, [AS_HELP_STRING([--without-scheme],[compile without Scheme interface])],
+            with_scheme=$withval, with_scheme=yes)
+AM_CONDITIONAL(WITH_SCHEME, test x"$with_scheme" = "xyes")
+
 ##############################################################################
 # Check for Guile library and its behavior (for libctl front end):
 
-if test "x$with_libctl" != xno; then
+if test "x$with_libctl" != xno -a "x$with_scheme" = "xyes"; then
+
+save_LIBS=$LIBS
+save_CPPFLAGS=$CPPFLAGS
 
 AC_CHECK_PROG(GUILE_CONFIG, guile-config, guile-config, unknown)
 if test "x$GUILE_CONFIG" = "xunknown"; then
-        AC_CHECK_LIB(readline, readline)
-        AC_CHECK_LIB(dl, dlopen)
-        AC_CHECK_LIB(guile-ltdl, scm_lt_dlinit, [], [AC_CHECK_LIB(ltdl, dlopen)])
-        AC_CHECK_LIB(guile, gh_eval_str, [],
-                     [AC_CHECK_LIB(guile, scm_eval_string, [],
-		         [AC_MSG_ERROR([linking to guile failed])])])
+  AC_CHECK_LIB(readline, readline)
+  AC_CHECK_LIB(dl, dlopen)
+  AC_CHECK_LIB(guile-ltdl, scm_lt_dlinit, [], [AC_CHECK_LIB(ltdl, dlopen)])
+  AC_CHECK_LIB(guile, gh_eval_str, [],
+    [AC_CHECK_LIB(guile, scm_eval_string, [],
+    [AC_MSG_ERROR([linking to guile failed])])])
+  GUILE_LIBS="-lguile -lguile-ltdl -lreadline"
+  GUILE_CPPFLAGS=""
 else
-        CPPFLAGS="$CPPFLAGS `$GUILE_CONFIG compile`"
-        LIBS="`$GUILE_CONFIG link` $LIBS"
-	AC_MSG_CHECKING([if linking to guile works])
-	AC_TRY_LINK_FUNC(gh_enter, AC_MSG_RESULT(yes),
- 	  [AC_TRY_LINK_FUNC(scm_boot_guile, AC_MSG_RESULT(yes),
-            [AC_MSG_RESULT(no)
-             AC_MSG_ERROR([guile-config is broken])])])
+  GUILE_LIBS=`$GUILE_CONFIG link`
+  GUILE_CPPFLAGS=`$GUILE_CONFIG compile`
+  CPPFLAGS="$CPPFLAGS $GUILE_CPPFLAGS"
+  LIBS="$GUILE_LIBS $LIBS"
+  AC_MSG_CHECKING([if linking to guile works])
+  AC_TRY_LINK_FUNC(gh_enter, AC_MSG_RESULT(yes),
+    [AC_TRY_LINK_FUNC(scm_boot_guile, AC_MSG_RESULT(yes),
+    [AC_MSG_RESULT(no)
+     AC_MSG_ERROR([guile-config is broken])])])
 fi
 AC_CHECK_HEADERS([libguile.h guile/gh.h])
 
@@ -88,28 +98,22 @@ AC_CHECK_HEADERS([libguile.h guile/gh.h])
 
 AC_CHECK_FUNCS(scm_make_smob_type)
 AC_MSG_CHECKING([for SCM_SMOB_PREDICATE])
-AC_TRY_LINK([#include <guile/gh.h>
-#include <libguile/smob.h>],
-                    [int x; SCM_SMOB_PREDICATE(1,x);],
-                    ok=yes, ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+#include <libguile/smob.h>]], [[int x; SCM_SMOB_PREDICATE(1,x);]])],[ok=yes],[ok=no])
 AC_MSG_RESULT($ok)
 if test $ok = yes; then
 	AC_DEFINE(HAVE_SCM_SMOB_PREDICATE, 1, [define if we have SCM_SMOB_PREDICATE])
 fi
 AC_MSG_CHECKING([for SCM_SMOB_DATA])
-AC_TRY_LINK([#include <guile/gh.h>
-#include <libguile/smob.h>],
-                    [int x; SCM_SMOB_DATA(x);],
-                    ok=yes, ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+#include <libguile/smob.h>]], [[int x; SCM_SMOB_DATA(x);]])],[ok=yes],[ok=no])
 AC_MSG_RESULT($ok)
 if test $ok = yes; then
 	AC_DEFINE(HAVE_SCM_SMOB_DATA, 1, [define if we have SCM_SMOB_DATA])
 fi
 AC_MSG_CHECKING([for SCM_NEWSMOB])
-AC_TRY_LINK([#include <guile/gh.h>
-#include <libguile/smob.h>],
-                    [int x; SCM_NEWSMOB(x,1,0);],
-                    ok=yes, ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+#include <libguile/smob.h>]], [[int x; SCM_NEWSMOB(x,1,0);]])],[ok=yes],[ok=no])
 AC_MSG_RESULT($ok)
 if test $ok = yes; then
 	AC_DEFINE(HAVE_SCM_NEWSMOB, 1, [define if we have SCM_NEWSMOB])
@@ -137,14 +141,23 @@ fi
 fi
 AC_SUBST(ACTIVATE_READLINE)
 
-fi # if with_libctl
+AC_SUBST(GUILE_LIBS)
+AC_SUBST(GUILE_CPPFLAGS)
+LIBS=$save_LIBS
+CPPFLAGS=$save_CPPFLAGS
 
 ##############################################################################
 # Check for libctl library and files
 
-if test "x$with_libctl" != xno; then
+save_LIBS=$LIBS
+save_CPPFLAGS=$CPPFLAGS
+LIBS="$GUILE_LIBS $LIBS"
+CPPFLAGS="$CPPFLAGS $GUILE_CPPFLAGS"
 
 AC_MSG_CHECKING([for libctl dir])
+if test x != x"$LIBCTL_DIR" -a -r "$LIBCTL_DIR/share/libctl/base/ctl.scm"; then
+	LIBCTL_DIR="$LIBCTL_DIR/share/libctl"
+fi
 if test x != x"$LIBCTL_DIR" -a ! -r "$LIBCTL_DIR/base/ctl.scm"; then
 	LIBCTL_DIR=""
 fi
@@ -178,7 +191,7 @@ AC_CHECK_HEADER(ctl.h, [CTL_H_CPPFLAG=" "], [
   AC_MSG_CHECKING([for alternate ctl.h location])
   for ctl_h_path in /usr/include/ctl /usr/local/include/ctl; do
      CPPFLAGS="$save_CPPFLAGS -I$ctl_h_path"
-     AC_COMPILE_IFELSE(AC_LANG_PROGRAM([[#include <ctl.h>]],[]), [CTL_H_CPPFLAG=-I$ctl_h_path; break])
+     AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <ctl.h>]],[])], [CTL_H_CPPFLAG=-I$ctl_h_path; break])
   done
   AC_MSG_RESULT([$CTL_H_CPPFLAG])
   CPPFLAGS=$save_CPPFLAGS])
@@ -187,8 +200,10 @@ if test "x$CTL_H_CPPFLAG" = "x"; then
 fi
 AC_SUBST(CTL_H_CPPFLAG)
 
+save_CPPFLAGS=$CPPFLAGS
+CPPFLAGS="$CPPFLAGS $CTL_H_CPPFLAG"
 # Check libctl version >= LIBCTL_MAJOR.LIBCTL_MINOR.LIBCTL_BUGFIX
-LIBCTL_MAJOR=3; LIBCTL_MINOR=2; LIBCTL_BUGFIX=0
+LIBCTL_MAJOR=4; LIBCTL_MINOR=2; LIBCTL_BUGFIX=0
 AC_MSG_CHECKING([whether libctl version is at least ${LIBCTL_MAJOR}.${LIBCTL_MINOR}.${LIBCTL_BUGFIX}])
 AC_EGREP_CPP(yes, [[
 #include <ctl.h>
@@ -196,6 +211,7 @@ AC_EGREP_CPP(yes, [[
   yes
 #endif
 ]], [AC_MSG_RESULT(ok)], [AC_MSG_ERROR([libctl version ${LIBCTL_MAJOR}.${LIBCTL_MINOR}.${LIBCTL_BUGFIX} or later is required])])
+CPPFLAGS=$save_CPPFLAGS
 
 # Check for libctl_quiet feature (in libctl 3.1.1 or later):
 AC_MSG_CHECKING([for libctl_quiet feature])
@@ -206,12 +222,42 @@ else
    AC_MSG_RESULT(no)
 fi
 
-# On IRIX, basename/dirname functions in libctl/main.c require -lgen
-AC_CHECK_LIB(gen, basename)
+LIBS=$save_LIBS
+CPPFLAGS=$save_CPPFLAGS
 
-fi # if with_libctl
+LIBCTL_LIBS="-lctl $GUILE_LIBS"
+LIBCTL_CPPFLAGS="$GUILE_CPPFLAGS"
+
+fi # if with_libctl && with_scheme
 
 ##############################################################################
+
+AC_SUBST(LIBCTL_LIBS)
+AC_SUBST(LIBCTL_CPPFLAGS)
+
+##############################################################################
+
+# check for -lctlgeom:
+AC_CHECK_LIB(ctlgeom, vector3_dot, [have_libctlgeom=yes; LIBS="-lctlgeom $LIBS"], [have_libctlgeom=no])
+AM_CONDITIONAL(WITH_LIBCTLGEOM, test x"$have_libctlgeom" = "xyes")
+# check for ctl_printf_callback
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <ctlgeom.h>]], [ctl_printf_callback = 0;])],
+  AC_DEFINE([HAVE_CTL_PRINTF_CALLBACK], [1], [If we have the ctl_printf_callback variable]))
+
+##############################################################################
+# check for libGDSII
+AC_CHECK_HEADER(libGDSII.h, [have_gdsii=maybe], [have_gdsii=no])
+if test "x$have_gdsii" = xmaybe; then
+  AC_CHECK_LIB(GDSII, libGDSIIExists)
+  if test "x$ac_cv_lib_GDSII_libGDSIIExists" = xyes; then
+    AC_MSG_CHECKING([for libGDSII::GetLayers])
+    have_gdsii_getlayers=no
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <libGDSII.h>]], [libGDSII::GetLayers("foo")])],
+      [have_gdsii_getlayers=yes
+       AC_DEFINE([HAVE_GDSII_GETLAYERS], [1], [If we have libGDSII::GetLayers])])
+    AC_MSG_RESULT($have_gdsii_getlayers)
+  fi
+fi
 
 LIBCTL_LIBS=$LIBS
 AC_SUBST(LIBCTL_LIBS)
@@ -219,7 +265,15 @@ LIBS=$libbessels_save_LIBS
 
 ##################################################
 # Checks for header files.
-AC_HEADER_STDC
+dnl m4_warn([obsolete],
+dnl [The preprocessor macro `STDC_HEADERS' is obsolete.
+dnl   Except in unusual embedded environments, you can safely include all
+dnl   ISO C90 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+# AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 AC_CHECK_HEADERS([math.h complex.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
