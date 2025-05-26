@@ -65,22 +65,29 @@ AM_CONDITIONAL(WITH_LIBCTL, test "x$with_libctl" != xno)
 
 if test "x$with_libctl" != xno; then
 
+save_LIBS=$LIBS
+save_CPPFLAGS=$CPPFLAGS
+
 AC_CHECK_PROG(GUILE_CONFIG, guile-config, guile-config, unknown)
 if test "x$GUILE_CONFIG" = "xunknown"; then
-        AC_CHECK_LIB(readline, readline)
-        AC_CHECK_LIB(dl, dlopen)
-        AC_CHECK_LIB(guile-ltdl, scm_lt_dlinit, [], [AC_CHECK_LIB(ltdl, dlopen)])
-        AC_CHECK_LIB(guile, gh_eval_str, [],
-                     [AC_CHECK_LIB(guile, scm_eval_string, [],
-		         [AC_MSG_ERROR([linking to guile failed])])])
+  AC_CHECK_LIB(readline, readline)
+  AC_CHECK_LIB(dl, dlopen)
+  AC_CHECK_LIB(guile-ltdl, scm_lt_dlinit, [], [AC_CHECK_LIB(ltdl, dlopen)])
+  AC_CHECK_LIB(guile, gh_eval_str, [],
+    [AC_CHECK_LIB(guile, scm_eval_string, [],
+    [AC_MSG_ERROR([linking to guile failed])])])
+  GUILE_LIBS="-lguile -lguile-ltdl -lreadline"
+  GUILE_CPPFLAGS=""
 else
-        CPPFLAGS="$CPPFLAGS `$GUILE_CONFIG compile`"
-        LIBS="`$GUILE_CONFIG link` $LIBS"
-	AC_MSG_CHECKING([if linking to guile works])
-	AC_TRY_LINK_FUNC(gh_enter, AC_MSG_RESULT(yes),
- 	  [AC_TRY_LINK_FUNC(scm_boot_guile, AC_MSG_RESULT(yes),
-            [AC_MSG_RESULT(no)
-             AC_MSG_ERROR([guile-config is broken])])])
+  GUILE_LIBS=`$GUILE_CONFIG link`
+  GUILE_CPPFLAGS=`$GUILE_CONFIG compile`
+  CPPFLAGS="$CPPFLAGS $GUILE_CPPFLAGS"
+  LIBS="$GUILE_LIBS $LIBS"
+  AC_MSG_CHECKING([if linking to guile works])
+  AC_TRY_LINK_FUNC(gh_enter, AC_MSG_RESULT(yes),
+    [AC_TRY_LINK_FUNC(scm_boot_guile, AC_MSG_RESULT(yes),
+    [AC_MSG_RESULT(no)
+     AC_MSG_ERROR([guile-config is broken])])])
 fi
 AC_CHECK_HEADERS([libguile.h guile/gh.h])
 
@@ -88,28 +95,22 @@ AC_CHECK_HEADERS([libguile.h guile/gh.h])
 
 AC_CHECK_FUNCS(scm_make_smob_type)
 AC_MSG_CHECKING([for SCM_SMOB_PREDICATE])
-AC_TRY_LINK([#include <guile/gh.h>
-#include <libguile/smob.h>],
-                    [int x; SCM_SMOB_PREDICATE(1,x);],
-                    ok=yes, ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+#include <libguile/smob.h>]], [[int x; SCM_SMOB_PREDICATE(1,x);]])],[ok=yes],[ok=no])
 AC_MSG_RESULT($ok)
 if test $ok = yes; then
 	AC_DEFINE(HAVE_SCM_SMOB_PREDICATE, 1, [define if we have SCM_SMOB_PREDICATE])
 fi
 AC_MSG_CHECKING([for SCM_SMOB_DATA])
-AC_TRY_LINK([#include <guile/gh.h>
-#include <libguile/smob.h>],
-                    [int x; SCM_SMOB_DATA(x);],
-                    ok=yes, ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+#include <libguile/smob.h>]], [[int x; SCM_SMOB_DATA(x);]])],[ok=yes],[ok=no])
 AC_MSG_RESULT($ok)
 if test $ok = yes; then
 	AC_DEFINE(HAVE_SCM_SMOB_DATA, 1, [define if we have SCM_SMOB_DATA])
 fi
 AC_MSG_CHECKING([for SCM_NEWSMOB])
-AC_TRY_LINK([#include <guile/gh.h>
-#include <libguile/smob.h>],
-                    [int x; SCM_NEWSMOB(x,1,0);],
-                    ok=yes, ok=no)
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <guile/gh.h>
+#include <libguile/smob.h>]], [[int x; SCM_NEWSMOB(x,1,0);]])],[ok=yes],[ok=no])
 AC_MSG_RESULT($ok)
 if test $ok = yes; then
 	AC_DEFINE(HAVE_SCM_NEWSMOB, 1, [define if we have SCM_NEWSMOB])
@@ -136,6 +137,11 @@ else
 fi
 fi
 AC_SUBST(ACTIVATE_READLINE)
+
+AC_SUBST(GUILE_LIBS)
+AC_SUBST(GUILE_CPPFLAGS)
+LIBS="$save_LIBS $GIULE_LIBS"
+CPPFLAGS="$save_CPPFLAGS $GUILE_CPPFLAGS"
 
 fi # if with_libctl
 
