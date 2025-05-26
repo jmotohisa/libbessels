@@ -233,7 +233,7 @@ CPPFLAGS=$save_CPPFLAGS
 LIBCTL_LIBS="-lctl $GUILE_LIBS"
 LIBCTL_CPPFLAGS="$GUILE_CPPFLAGS"
 
-fi # if with_libctl && with_scheme
+# fi # if with_libctl && with_scheme
 
 ##############################################################################
 
