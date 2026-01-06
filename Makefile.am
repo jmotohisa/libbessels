@@ -9,7 +9,7 @@ libbessels_la_SOURCES = dbessel.c \
           bessel_wrap/toms644/cbsubs.f bessel_wrap/toms644/zbsubs.f bessel_wrap/toms644/xerror.f \
           bessel_wrap/toms644/i1mach.f bessel_wrap/toms644/r1mach.f bessel_wrap/toms644/d1mach.f 
 libbessels_la_LIBADD = $(FLIBS)
-libbessels_la_FFLAGS = -fallow-argument-mismatch
+# libbessels_la_FFLAGS = -fallow-argument-mismatch
 
 include_HEADERS = libbessels.h
 libbesselsdir = $(includedir)/libbessels
